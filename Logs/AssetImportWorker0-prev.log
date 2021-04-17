@@ -1,0 +1,187 @@
+Using pre-set license
+Built from '2021.1/release' branch; Version is '2021.1.1f1 (6fdc41dfa55a) revision 7330881'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19042.928; Version 2009; 64bit' Language: 'zh' Physical Memory: 8043 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity 2021.1.1f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/unity檔案/橋牌遊戲
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+54391
+Successfully changed project path to: D:/unity檔案/橋牌遊戲
+D:/unity檔案/橋牌遊戲
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 292.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.1.1f1 (6fdc41dfa55a)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2021.1.1f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/unity檔案/橋牌遊戲/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1650 (ID=0x1f91)
+    Vendor:   NVIDIA
+    VRAM:     3964 MB
+    Driver:   27.21.14.5763
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity 2021.1.1f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity 2021.1.1f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity 2021.1.1f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56500
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity 2021.1.1f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008117 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 227.58 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  6.215 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.012050 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 243.79 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.516 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.17 seconds
+Refreshing native plugins compatible for Editor in 1.90 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3366 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 127.6 MB.
+System memory in use after: 127.7 MB.
+
+Unloading 29 unused Assets to reduce memory usage. Loaded Objects now: 3818.
+Total: 5.426100 ms (FindLiveObjects: 0.607800 ms CreateObjectMapping: 0.364100 ms MarkObjects: 4.209200 ms  DeleteObjects: 0.243100 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets
+  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98ffa0a5e8f73f3457f64fc720c11ab1') in 0.012195 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000855 seconds.
+  path: Assets/Scenes
+  artifactKey: Guid(ef341e146676f564a8e286551aaedffc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes using Guid(ef341e146676f564a8e286551aaedffc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '140ed1371f15a3739c753aed3acee444') in 0.007566 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007105 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.23 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.726 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.34 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3366 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 127.8 MB.
+System memory in use after: 127.9 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 3827.
+Total: 4.372700 ms (FindLiveObjects: 0.598600 ms CreateObjectMapping: 0.446100 ms MarkObjects: 3.074800 ms  DeleteObjects: 0.250500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 100.578408 seconds.
+  path: Assets/gamemanager.cs
+  artifactKey: Guid(02bdad168cf45624a8b44427adaa0efe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/gamemanager.cs using Guid(02bdad168cf45624a8b44427adaa0efe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d9fefd2625e95cda37959027fa0e2f4') in 0.062759 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.461800 seconds.
+  path: Assets/Spade
+  artifactKey: Guid(bcc1d9dcfc92f7041b3b4353d74f1154) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Spade using Guid(bcc1d9dcfc92f7041b3b4353d74f1154) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2814351e2b08d8e2b436645f87cacce') in 0.005375 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 103.942880 seconds.
+  path: Assets/Clover/card_1_clover.png
+  artifactKey: Guid(ee372d1ba757eaa49a973c43be7cca9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_1_clover.png using Guid(ee372d1ba757eaa49a973c43be7cca9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09f85d8ba14771a1dfb90cbceb7c27c3') in 0.430370 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001347 seconds.
+  path: Assets/Clover/card_6_clover.png
+  artifactKey: Guid(8b90a5619868c764086581ed937bffd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_6_clover.png using Guid(8b90a5619868c764086581ed937bffd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8a865e5fe28e00521f3876e242be66d') in 0.039431 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001281 seconds.
+  path: Assets/Clover/card_5_clover.png
+  artifactKey: Guid(d48407cc239f7d44da4af9b691b032c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_5_clover.png using Guid(d48407cc239f7d44da4af9b691b032c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bd0ce1f663311cf9354e994fcc6cabb') in 0.039198 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001261 seconds.
+  path: Assets/Clover/card_2_clover.png
+  artifactKey: Guid(d216c793449103c4dbbf1524018402a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_2_clover.png using Guid(d216c793449103c4dbbf1524018402a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9986f78461acaaedf06e4121eae1bda') in 0.037094 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001160 seconds.
+  path: Assets/Clover/card_4_clover.png
+  artifactKey: Guid(5978efe42cb58f547adf251399854de7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_4_clover.png using Guid(5978efe42cb58f547adf251399854de7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbdd3980a554c301e1fd8c018adc2935') in 0.038870 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001538 seconds.
+  path: Assets/Clover/card_7_clover.png
+  artifactKey: Guid(b698f75854d634b4caa1b1734b2a78aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_7_clover.png using Guid(b698f75854d634b4caa1b1734b2a78aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9fdf88147a717514a77a6449268cb07') in 0.038589 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001225 seconds.
+  path: Assets/Clover/card_3_clover.png
+  artifactKey: Guid(c97058b96cfd1a34da5be4a68ec705fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_3_clover.png using Guid(c97058b96cfd1a34da5be4a68ec705fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1caeff6392a54bf3bd646adfdbfacdfa') in 0.039077 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001089 seconds.
+  path: Assets/Clover/card_8_clover.png
+  artifactKey: Guid(06bf9551f21871844b75e1ad0c1cb0ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_8_clover.png using Guid(06bf9551f21871844b75e1ad0c1cb0ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0f2d62115bf552e1ac440a0e491a33a') in 0.041593 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.001269 seconds.
+  path: Assets/Clover/card_9_clover.png
+  artifactKey: Guid(d3072047f8f8c714a81c696cd01ce11d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Clover/card_9_clover.png using Guid(d3072047f8f8c714a81c696cd01ce11d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69904b8b92550922f14fb9e15d3d80f9') in 0.036032 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005831 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.063 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.11 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 135.5 MB.
+System memory in use after: 135.6 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 3972.
+Total: 5.564000 ms (FindLiveObjects: 0.645500 ms CreateObjectMapping: 0.407200 ms MarkObjects: 4.328700 ms  DeleteObjects: 0.179400 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 02bdad168cf45624a8b44427adaa0efe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - table: {instanceID: 0}
+  - startcamera: {fileID: 7251148090532335379, guid: 48a8d05935e940343b5e21ad086720c3, type: 3}
+  - playcamera: {fileID: 4730711497363784815, guid: f1926cb3477dc224798f11b0ffd611f9, type: 3}
+  - startgame: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
