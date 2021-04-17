@@ -8,6 +8,7 @@ public class tablecontrol : MonoBehaviour
     public static bool istrigger;
     private void OnTriggerStay2D(Collider2D other)
     {
+        
         istrigger = true;
         gameObject.GetComponent<Renderer>().material.color = new Vector4(1.0f, 0.92f, 0.016f, 1.0f);
     }

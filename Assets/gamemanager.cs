@@ -13,6 +13,7 @@ public class gamemanager : MonoBehaviour
     public Vector2 mousepos;
     public Vector2[] cardnormalscale,cardchoosescale;
     public float[] handcardlength, leftcardhorizonpos, cardverticalpos;
+    public int[] handcardnum;
 
     void Awake()
     {
@@ -111,11 +112,19 @@ public class gamemanager : MonoBehaviour
             }
         }
     }
-    public int cardtoplayer(GameObject[,] player,GameObject poker) {
+    public Vector2 cardtoplayer(GameObject[,] player,GameObject poker)
+    {
+        Vector2 a;
         for (int i = 0; i < 4; i++)
             for (int k = 0; k < 13; k++)
-                if (player[i, k] == poker)
-                    return i;
-        return -1;
+                if (player[i, k] == poker) 
+                {
+                    a = new Vector2(i, k);
+                    return a;
+                }
+        print("no person own the card");
+        a = new Vector2(-1, -1);
+        return a;
     }
 }
+

@@ -250,8 +250,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1531474419}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
+      propertyPath: handcardnum.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: handcardlength.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
+      propertyPath: handcardnum.Array.data[0]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
+      propertyPath: handcardnum.Array.data[1]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
+      propertyPath: handcardnum.Array.data[2]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
+      propertyPath: handcardnum.Array.data[3]
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.size
@@ -311,27 +331,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[1].x
-      value: 1.6
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[1].y
-      value: 1.75
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[2].x
-      value: 1.7389
+      value: 1.9389
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[2].y
-      value: 1.7144
+      value: 1.9144
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[3].x
-      value: 1.6
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardchoosescale.Array.data[3].y
-      value: 1.75
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
       propertyPath: cardnormalscale.Array.data[0].x
@@ -679,7 +699,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7075472, g: 0.3768583, b: 0.13616943, a: 1}
   m_FlipX: 0
