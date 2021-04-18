@@ -23,17 +23,14 @@ public class gamemanager : MonoBehaviour
         }
     }
 
-    public void Startcard(GameObject[] Poker,ref GameObject[,] player,GameObject a,float j,short b, short k, short temp, short i, short f,short rcard,short[,] playerindex,short[] index, 
-    Vector2[] cardnormalscale,//2.28f, 2.247f
-    float[] handcardlength,//12.295
-    float[] leftcardhorizonpos,//-6.1
-    float[] cardverticalpos//-3.49f
-    )
+    public void Startcard()
     {
-        rcard = 52;
-        index = new short[52];
+        short[,] playerindex = new short[4, 13];
+        short[] index = new short[52];
+        short b, k, temp,i,f,rcard;
         player = new GameObject[4,13];
-        playerindex = new short[4,13];
+        rcard = 52;
+        manager.handcardnum = new int[] { 13, 13, 13, 13 };
         for (i = 0; i < 52; i++)
             index[i] = i;
         for (i = 0; i < 52; i++)
@@ -67,50 +64,58 @@ public class gamemanager : MonoBehaviour
             }
             for (i = 0; i < 13; i++)
             {
-                a = Poker[playerindex[k, i]];
-                j = (float)i;
-                Instantiate(a, new Vector2(-0.63f,0.09f), Quaternion.identity);
-                player[k,i] = GameObject.Find(a.name+"(Clone)");
+                Instantiate(Poker[playerindex[k, i]], new Vector2(-0.63f,0.09f), Quaternion.identity);
+                player[k,i] = GameObject.Find(Poker[playerindex[k, i]].name+"(Clone)");
                 player[k, i].transform.Rotate(new Vector3(0, 0, 90 * k));
                 player[k, i].gameObject.GetComponent<SpriteRenderer>().sortingOrder = i;
                 if (k == 0)
                 {
-                    player[k, i].transform.position = new Vector2(leftcardhorizonpos[k] + j * (handcardlength[k] / 12), cardverticalpos[k]);
+                    player[k, i].transform.position = new Vector2(leftcardhorizonpos[k] + i * (handcardlength[k] / 12), cardverticalpos[k]);
                     player[k, i].transform.localScale = cardnormalscale[k];
                 }
                 if (k == 1)
                 {
-                    player[k, i].transform.position = new Vector2(cardverticalpos[k],leftcardhorizonpos[k] + j * (handcardlength[k] / 12) );
+                    player[k, i].transform.position = new Vector2(cardverticalpos[k],leftcardhorizonpos[k] + i * (handcardlength[k] / 12) );
                     player[k, i].transform.localScale = cardnormalscale[k];
                 }
                 if (k == 2)
                 {
-                    player[k, i].transform.position = new Vector2(leftcardhorizonpos[k] - j * (handcardlength[k] / 12), cardverticalpos[k]);
+                    player[k, i].transform.position = new Vector2(leftcardhorizonpos[k] -i * (handcardlength[k] / 12), cardverticalpos[k]);
                     player[k, i].transform.localScale = cardnormalscale[k];
                 }
                 if (k == 3)
                 {
-                    player[k, i].transform.position = new Vector2(cardverticalpos[k], leftcardhorizonpos[k] - j * (handcardlength[k] / 12));
+                    player[k, i].transform.position = new Vector2(cardverticalpos[k], leftcardhorizonpos[k] - i * (handcardlength[k] / 12));
                     player[k, i].transform.localScale = cardnormalscale[k];
                 }
                 player[k,i].AddComponent<BoxCollider2D>();
                 player[k,i].GetComponent<BoxCollider2D>().isTrigger = true;
                 player[k, i].AddComponent<mousecontrol>();
-                player[k, i].SetActive(false);
             }
         }
     }
-    public void onplaycardbotton()
+    public void on_start_button()
     {
-        GameObject.Find("Canvas").SetActive(false);
+        GameObject.Find("startbutton").SetActive(false);
+        GameObject.Find("settingbutton").SetActive(false);
         manager.table.SetActive(true);
-        for (int k = 0; k < 4; k++)
-        {
-            for (int i = 0; i < 13; i++)
-            {
-                manager.player[k, i].SetActive(true);
-            }
-        }
+        manager.Startcard();
+        
+
+    }
+    public void on_setting_button() 
+    {
+        
+    }
+
+    public void on_restart_button()
+    {
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                DestroyImmediate(manager.player[i, k]);
+        manager.table.SetActive(true);
+        manager.Startcard();
+
     }
     public Vector2 cardtoplayer(GameObject[,] player,GameObject poker)
     {
@@ -126,5 +131,6 @@ public class gamemanager : MonoBehaviour
         a = new Vector2(-1, -1);
         return a;
     }
+
 }
 

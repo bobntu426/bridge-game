@@ -37,7 +37,11 @@ public class mousecontrol : MonoBehaviour
     }
     void OnMouseUp()//持續點擊著牌的滑鼠放開的那一瞬間會做的事
     {
-        GameObject[,] player_in_game = gamemanager.manager.player;
+        GameObject[,] player_in_game = new GameObject[4, 13];
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                player_in_game[i, k] = gamemanager.manager.player[i, k];
+
         if (tablecontrol.istrigger == false)
         {
             transform.position = tempposition;
