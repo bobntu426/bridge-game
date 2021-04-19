@@ -37,11 +37,6 @@ public class mousecontrol : MonoBehaviour
     }
     void OnMouseUp()//持續點擊著牌的滑鼠放開的那一瞬間會做的事
     {
-        GameObject[,] player_in_game = new GameObject[4, 13];
-        for (int i = 0; i < 4; i++)
-            for (int k = 0; k < 13; k++)
-                player_in_game[i, k] = gamemanager.manager.player[i, k];
-
         if (tablecontrol.istrigger == false)
         {
             transform.position = tempposition;
@@ -51,10 +46,10 @@ public class mousecontrol : MonoBehaviour
             gameObject.tag = "tablecard";
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gamemanager.manager.handcardnum[0]--;
-            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).y; k < gamemanager.manager.handcardnum[0]; k++)
-                player_in_game[0, k] = player_in_game[0, k + 1];
-            for (int i = 0; i < gamemanager.manager.handcardnum[0]; i++) 
-                player_in_game[0, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[0]+gamemanager.manager.handcardlength[0]/24* (13-gamemanager.manager.handcardnum[0]) + gamemanager.manager.handcardlength[0]/12*i, gamemanager.manager.cardverticalpos[0]);
+            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[0]; k++)
+                gamemanager.manager.player_in_game[0, k] = gamemanager.manager.player_in_game[0, k + 1];
+            for (int i = 0; i < gamemanager.manager.handcardnum[0]; i++)
+                gamemanager.manager.player_in_game[0, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[0]+gamemanager.manager.handcardlength[0]/24* (13-gamemanager.manager.handcardnum[0]) + gamemanager.manager.handcardlength[0]/12*i, gamemanager.manager.cardverticalpos[0]);
             gameObject.transform.position = new Vector2(0, -1.7f);
             transform.localScale = new Vector2(2, 1.9f);
         }
@@ -63,10 +58,10 @@ public class mousecontrol : MonoBehaviour
             gameObject.tag = "tablecard";
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gamemanager.manager.handcardnum[1]--;
-            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).y; k < gamemanager.manager.handcardnum[1]; k++)
-                player_in_game[1, k] = player_in_game[1, k + 1];
+            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[1]; k++)
+                gamemanager.manager.player_in_game[1, k] = gamemanager.manager.player_in_game[1, k + 1];
             for (int i = 0; i < gamemanager.manager.handcardnum[1]; i++)
-                player_in_game[1, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[1], gamemanager.manager.leftcardhorizonpos[1] + gamemanager.manager.handcardlength[1] / 24 * (13 - gamemanager.manager.handcardnum[1]) + gamemanager.manager.handcardlength[1] / 12 * i);
+                gamemanager.manager.player_in_game[1, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[1], gamemanager.manager.leftcardhorizonpos[1] + gamemanager.manager.handcardlength[1] / 24 * (13 - gamemanager.manager.handcardnum[1]) + gamemanager.manager.handcardlength[1] / 12 * i);
 
             gameObject.transform.position = new Vector2(1.5f, 0);
             transform.localScale = new Vector2(2, 1.9f);
@@ -77,10 +72,10 @@ public class mousecontrol : MonoBehaviour
             gameObject.tag = "tablecard";
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gamemanager.manager.handcardnum[2]--;
-            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).y; k < gamemanager.manager.handcardnum[2]; k++)
-                player_in_game[2, k] = player_in_game[2, k + 1];
+            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[2]; k++)
+                gamemanager.manager.player_in_game[2, k] = gamemanager.manager.player_in_game[2, k + 1];
             for (int i = 0; i < gamemanager.manager.handcardnum[2]; i++)
-                player_in_game[2, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[2] - gamemanager.manager.handcardlength[2] / 24 * (13 - gamemanager.manager.handcardnum[2]) - gamemanager.manager.handcardlength[2] / 12 * i, gamemanager.manager.cardverticalpos[2]);
+                gamemanager.manager.player_in_game[2, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[2] - gamemanager.manager.handcardlength[2] / 24 * (13 - gamemanager.manager.handcardnum[2]) - gamemanager.manager.handcardlength[2] / 12 * i, gamemanager.manager.cardverticalpos[2]);
 
             gameObject.transform.position = new Vector2(0, 1.7f);
             transform.localScale = new Vector2(2, 1.9f);
@@ -91,10 +86,10 @@ public class mousecontrol : MonoBehaviour
             gameObject.tag = "tablecard";
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             gamemanager.manager.handcardnum[3]--;
-            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).y; k < gamemanager.manager.handcardnum[3]; k++)
-                player_in_game[3, k] = player_in_game[3, k + 1];
+            for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[3]; k++)
+                gamemanager.manager.player_in_game[3, k] = gamemanager.manager.player_in_game[3, k + 1];
             for (int i = 0; i < gamemanager.manager.handcardnum[3]; i++)
-                player_in_game[3, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[3], gamemanager.manager.leftcardhorizonpos[3] - gamemanager.manager.handcardlength[3] / 24 * (13 - gamemanager.manager.handcardnum[3]) - gamemanager.manager.handcardlength[3] / 12 * i);
+                gamemanager.manager.player_in_game[3, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[3], gamemanager.manager.leftcardhorizonpos[3] - gamemanager.manager.handcardlength[3] / 24 * (13 - gamemanager.manager.handcardnum[3]) - gamemanager.manager.handcardlength[3] / 12 * i);
             gameObject.transform.position = new Vector2(-1.5f, 0);
             transform.localScale = new Vector2(2, 1.9f);
         }

@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - tablecard
+  - kingcolor
+  - mastercolor
+  - clover
+  - diamond
+  - heart
+  - spade
   layers:
   - Default
   - TransparentFX

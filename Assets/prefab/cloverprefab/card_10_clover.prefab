@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1583008258357763100}
   m_Layer: 0
   m_Name: card_10_clover
-  m_TagString: Untagged
+  m_TagString: clover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

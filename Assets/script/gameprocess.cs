@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class gameprocess : MonoBehaviour
 {
+    
     void Start()
     {
-
-
-
 
     }
     void Update()
