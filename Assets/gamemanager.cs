@@ -147,6 +147,9 @@ public class gamemanager : MonoBehaviour
         manager.team_red.SetActive(true);
         manager.team_blue.SetActive(true);
         manager.pointer[0].SetActive(true);
+        manager.pointer[1].SetActive(false);
+        manager.pointer[2].SetActive(false);
+        manager.pointer[3].SetActive(false);
         manager.Startcard();
     }
     public Vector2 cardtoplayer(GameObject[,] player, GameObject poker)
@@ -254,7 +257,7 @@ public class gamemanager : MonoBehaviour
         manager.temp_king = 1;
         for (int i = 0; i < manager.call_number - 1; i++)
             manager.number_button[i].SetActive(false);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             manager.color_button[i].SetActive(true);
         manager.pass = 0;
     }
@@ -265,7 +268,7 @@ public class gamemanager : MonoBehaviour
 
         for (int i = 0; i < manager.call_number - 1; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             manager.color_button[i].SetActive(true);
         manager.pass = 0;
     }
@@ -276,7 +279,7 @@ public class gamemanager : MonoBehaviour
  
         for (int i = 0; i < manager.call_number - 1; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             manager.color_button[i].SetActive(true);
         manager.pass = 0;
     }
@@ -284,9 +287,20 @@ public class gamemanager : MonoBehaviour
     {
         temp_king = 4;
         manager.call_number = want_number;
+        for (int i = 0; i < manager.call_number-1; i++)
+            number_button[i].SetActive(false);
+        for (int i = 0; i < 5; i++)
+            manager.color_button[i].SetActive(true);
+        manager.pass = 0;
+    }
+
+    public void on_no_king_button() 
+    {
+        temp_king = 5;
+        manager.call_number = want_number;
         for (int i = 0; i < manager.call_number; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             manager.color_button[i].SetActive(true);
         manager.pass = 0;
     }
@@ -300,7 +314,7 @@ public class gamemanager : MonoBehaviour
     }
     public void inactive_button()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             color_button[i].SetActive(true);
         }
@@ -311,7 +325,7 @@ public class gamemanager : MonoBehaviour
     }
     public void destroy_button()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             color_button[i].SetActive(false);
         }
@@ -354,7 +368,11 @@ public class gamemanager : MonoBehaviour
                 manager.king = "heart";
             if (manager.temp_king == 4)
                 manager.king = "spade";
-            if (manager.click_number % 4 == 0)
+            for (int i = 0; i < 4; i++)
+                for (int k = 0; k < 13; k++)
+                    if (manager.player[i, k].tag == manager.king)
+                        manager.player[i, k].tag = "kingcolor";
+                    if (manager.click_number % 4 == 0)
             {
                 manager.red_goal_score = manager.call_number + 6;
                 manager.blue_goal_score = 14 - manager.red_goal_score;
@@ -365,22 +383,22 @@ public class gamemanager : MonoBehaviour
             {
                 manager.blue_goal_score = manager.call_number + 6;
                 manager.red_goal_score = 14 - manager.blue_goal_score;
-                manager.pointer[0].SetActive(true);
-                manager.pointer[1].SetActive(false);
+                manager.pointer[1].SetActive(true);
+                manager.pointer[2].SetActive(false);
             }
             else if (manager.click_number % 4 == 2)
             {
                 manager.red_goal_score = manager.call_number + 6;
                 manager.blue_goal_score = 14 - manager.red_goal_score;
-                manager.pointer[1].SetActive(true);
-                manager.pointer[2].SetActive(false);
+                manager.pointer[2].SetActive(true);
+                manager.pointer[3].SetActive(false);
             }
             else
             {
                 manager.blue_goal_score = manager.call_number + 6;
                 manager.red_goal_score = 14 - manager.blue_goal_score;
-                manager.pointer[2].SetActive(true);
-                manager.pointer[3].SetActive(false);
+                manager.pointer[3].SetActive(true);
+                manager.pointer[1].SetActive(false);
             }
 
         }
