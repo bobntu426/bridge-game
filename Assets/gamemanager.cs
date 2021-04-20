@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class gamemanager : MonoBehaviour
 {
     public static gamemanager manager;
-    public GameObject table, team_red, team_blue;
-    public GameObject[] Poker, number_button, color_button,pointer;
+    public GameObject table, team_red, team_blue;//遊戲畫面上的桌子、顯示隊伍分數的文字
+    public GameObject[] Poker, number_button, color_button,pointer,table_card;//儲存所有撲克牌元素的陣列、喊數字的按鈕、喊花色的按鈕、打在桌上的牌
     public GameObject[,] player, player_in_game;
     public Button startgame;
     public Vector2 mousepos;
     public Vector2[] cardnormalscale, cardchoosescale;
+    public int[] card_number;//紀錄
 
     //四位玩家的手牌總物理長度、最左邊的手牌的橫向位置(玩家0、2為x軸大小，玩家1、3為y軸大小)、四位玩家手牌的縱向位置(玩家0、2為y軸大小，玩家1、3為x軸大小)
     public float[] handcardlength, leftcardhorizonpos, cardverticalpos;
@@ -19,6 +20,7 @@ public class gamemanager : MonoBehaviour
     public int red_score, blue_score,red_goal_score,blue_goal_score;//兩隊吃的墩數、兩隊目標墩數
     public int call_number, want_number;//喊牌當下叫的數字兼最終喊到的數字，暫時喊到的數字
     public int pass,calling_player,temp_king,want_king,click_number;//喊pass的次數、正在喊牌的玩家、暫時喊到的花色、喊牌當下要叫的花色、點擊顏色按鈕的次數
+    public int table_card_number;//桌上已打的牌數
     public string king;//最終喊到的花色
 
     void Awake()
@@ -37,6 +39,7 @@ public class gamemanager : MonoBehaviour
         player = new GameObject[4, 13];
         rcard = 52;
         handcardnum = new int[] { 13, 13, 13, 13 };
+        table_card = new GameObject[4];
         player_in_game = new GameObject[4, 13];
 
         call_number = 0;
@@ -44,6 +47,7 @@ public class gamemanager : MonoBehaviour
         pass = 0;
         calling_player = 0;
         click_number = 0;
+        table_card_number = 0;
         for (i = 0; i < 52; i++) 
             if (i < 13)
                 Poker[i].tag = "clover";
@@ -151,6 +155,7 @@ public class gamemanager : MonoBehaviour
         manager.pointer[2].SetActive(false);
         manager.pointer[3].SetActive(false);
         manager.Startcard();
+        manager.reset_score();
     }
     public Vector2 cardtoplayer(GameObject[,] player, GameObject poker)
     {
@@ -176,12 +181,60 @@ public class gamemanager : MonoBehaviour
         manager.blue_score++;
         GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + manager.blue_score;
     }
+    public void reset_score()
+    {
+        GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + 0;
+        GameObject.Find("teamred").GetComponent<Text>().text = "紅隊墩數：" + 0;
+    }
     public void gameplay()
     {
 
     }
+
+    public int number_of_card(GameObject card)
+    {
+        for (int i = 0; i < 52; i++)
+            if (Poker[i].name + "(Clone)" == card.name)
+                return i;
+        return -1;
+    }
     public void card_compare()
     {
+        bool big;
+        GameObject temp;
+
+        for (int i = 0; i < 3; i++)
+        {
+            big = false;
+            if (table_card[i].tag == table_card[i + 1].tag)
+            {
+                if (number_of_card(table_card[i]) > number_of_card(table_card[i + 1]))
+                    big = true;
+
+            }
+
+            else if (table_card[i].tag == "kingcolor")
+            {
+                big = true;
+            }
+            else if (table_card[i].tag == "mastercolor" && table_card[i + 1].tag != "kingcolor")
+                big = true;
+            if (big == true)
+            {
+                temp = table_card[i];
+                table_card[i] = table_card[i + 1];
+                table_card[i + 1] = temp;
+            }
+        }
+
+        if (cardtoplayer(player, table_card[3]).x == 0|| cardtoplayer(player, table_card[3]).x == 2)
+        {
+            red_getscore();
+        }
+        else
+        {
+            blue_getscore();
+        }
 
     }
 
@@ -383,22 +436,22 @@ public class gamemanager : MonoBehaviour
             {
                 manager.blue_goal_score = manager.call_number + 6;
                 manager.red_goal_score = 14 - manager.blue_goal_score;
-                manager.pointer[1].SetActive(true);
-                manager.pointer[2].SetActive(false);
+                manager.pointer[0].SetActive(true);
+                manager.pointer[1].SetActive(false);
             }
             else if (manager.click_number % 4 == 2)
             {
                 manager.red_goal_score = manager.call_number + 6;
                 manager.blue_goal_score = 14 - manager.red_goal_score;
-                manager.pointer[2].SetActive(true);
-                manager.pointer[3].SetActive(false);
+                manager.pointer[1].SetActive(true);
+                manager.pointer[2].SetActive(false);
             }
             else
             {
                 manager.blue_goal_score = manager.call_number + 6;
                 manager.red_goal_score = 14 - manager.blue_goal_score;
-                manager.pointer[3].SetActive(true);
-                manager.pointer[1].SetActive(false);
+                manager.pointer[2].SetActive(true);
+                manager.pointer[3].SetActive(false);
             }
 
         }
