@@ -57,7 +57,6 @@ public class mousecontrol : MonoBehaviour
                     gamemanager.manager.player_in_game[0, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[0] + gamemanager.manager.handcardlength[0] / 24 * (13 - gamemanager.manager.handcardnum[0]) + gamemanager.manager.handcardlength[0] / 12 * i, gamemanager.manager.cardverticalpos[0]);
                 gameObject.transform.position = new Vector2(0, -1.7f);
                 transform.localScale = new Vector2(2, 1.9f);
-                print(transform.localScale);
             }
             else if (gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x == 1)
             {
@@ -123,7 +122,6 @@ public class mousecontrol : MonoBehaviour
                     for (int k = 0; k < 13; k++)
                         if (gamemanager.manager.player[i, k].tag == "mastercolor")
                         {
-                            print(tempcolor);
                             gamemanager.manager.player[i, k].tag = tempcolor;
                         }
             }

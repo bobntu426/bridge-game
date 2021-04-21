@@ -368,8 +368,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button6
         m_Mode: 1
         m_Arguments:
@@ -380,9 +380,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -596,8 +596,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button4
         m_Mode: 1
         m_Arguments:
@@ -608,9 +608,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -742,17 +742,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5341188763438153544, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
   m_PrefabInstance: {fileID: 379728136}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &218725354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5341188763438153545, guid: 896d9f9e661c7864a8b39a038963123b, type: 3}
-  m_PrefabInstance: {fileID: 379728136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218725352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02bdad168cf45624a8b44427adaa0efe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &218725356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,8 +916,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button1
         m_Mode: 1
         m_Arguments:
@@ -939,9 +928,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1761,8 +1750,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button2
         m_Mode: 1
         m_Arguments:
@@ -1773,9 +1762,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2213,8 +2202,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_setting_button
         m_Mode: 1
         m_Arguments:
@@ -3061,8 +3050,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
@@ -3073,8 +3062,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_clover_button
         m_Mode: 1
         m_Arguments:
@@ -3206,8 +3195,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
@@ -3218,8 +3207,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_spade_button
         m_Mode: 1
         m_Arguments:
@@ -3614,8 +3603,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button3
         m_Mode: 1
         m_Arguments:
@@ -3626,9 +3615,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3759,8 +3748,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
@@ -3771,8 +3760,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_no_king_button
         m_Mode: 1
         m_Arguments:
@@ -3983,8 +3972,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_restart_button
         m_Mode: 1
         m_Arguments:
@@ -4116,8 +4105,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_start_button
         m_Mode: 1
         m_Arguments:
@@ -4202,7 +4191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -251.56}
+  m_AnchoredPosition: {x: 400, y: -220}
   m_SizeDelta: {x: 255.09, y: 124.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1920204546
@@ -4249,9 +4238,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_pass_button
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4261,9 +4250,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_color_button
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_pass_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4473,8 +4462,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
@@ -4485,8 +4474,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_diamond_button
         m_Mode: 1
         m_Arguments:
@@ -4697,8 +4686,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button7
         m_Mode: 1
         m_Arguments:
@@ -4709,9 +4698,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4842,8 +4831,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_num_button5
         m_Mode: 1
         m_Arguments:
@@ -4854,9 +4843,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
-        m_MethodName: on_all_number_card
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
+        m_MethodName: on_all_number_button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4987,8 +4976,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_all_color_button
         m_Mode: 1
         m_Arguments:
@@ -4999,8 +4988,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 218725354}
-        m_TargetAssemblyTypeName: gamemanager, Assembly-CSharp
+      - m_Target: {fileID: 9205437975266300980, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+        m_TargetAssemblyTypeName: buttoncontrol, Assembly-CSharp
         m_MethodName: on_heart_button
         m_Mode: 1
         m_Arguments:
@@ -5049,3 +5038,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058207598}
   m_CullTransparentMesh: 1
+--- !u!1001 &5404276252587847682
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 472085178871874407, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_Name
+      value: buttoncontrol
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09688368
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.933518
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.460856
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930087200573705996, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05cfbc714426c2842a028a43600f3209, type: 3}
