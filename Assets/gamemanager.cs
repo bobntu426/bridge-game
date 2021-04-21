@@ -42,7 +42,7 @@ public class gamemanager : MonoBehaviour
         table_card = new GameObject[4];
         player_in_game = new GameObject[4, 13];
 
-        call_number = 0;
+        call_number = 1;
         temp_king = 0;
         pass = 0;
         calling_player = 0;
@@ -241,68 +241,41 @@ public class gamemanager : MonoBehaviour
     public void on_num_button1()
     {
         want_number = 1;
-        for (int i = 0; i < manager.temp_king; i++)
-            color_button[i].SetActive(false);
+
     }
     public void on_num_button2()
     {
         want_number = 2;
-        if (manager.call_number == 2)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
 
     }
     public void on_num_button3()
     {
         want_number = 3;
-        if (manager.call_number == 3)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
-
     }
     public void on_num_button4()
     {
         want_number = 4;
-        if (manager.call_number == 4)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
-
     }
     public void on_num_button5()
     {
         want_number = 5;
-        if (manager.call_number == 5)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
-
     }
     public void on_num_button6()
     {
         want_number = 6;
-        if (manager.call_number == 6)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
-
     }
     public void on_num_button7()
     {
         want_number = 7;
-        if (manager.call_number == 7)
-        {
-            for (int i = 0; i < manager.temp_king; i++)
-                color_button[i].SetActive(false);
-        }
-
+    }
+    public void on_all_number_card()
+    {
+        if (want_number == manager.call_number)
+            for (int i = 4; i > manager.temp_king - 1; i--)
+                color_button[i].SetActive(true);
+        else
+            for (int i = 0; i < 5; i++)
+                manager.color_button[i].SetActive(true);
     }
     public void on_clover_button()
     {
@@ -310,8 +283,7 @@ public class gamemanager : MonoBehaviour
         manager.temp_king = 1;
         for (int i = 0; i < manager.call_number - 1; i++)
             manager.number_button[i].SetActive(false);
-        for (int i = 0; i < 5; i++)
-            manager.color_button[i].SetActive(true);
+
         manager.pass = 0;
     }
     public void on_diamond_button()
@@ -321,8 +293,7 @@ public class gamemanager : MonoBehaviour
 
         for (int i = 0; i < manager.call_number - 1; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 5; i++)
-            manager.color_button[i].SetActive(true);
+
         manager.pass = 0;
     }
     public void on_heart_button()
@@ -332,8 +303,7 @@ public class gamemanager : MonoBehaviour
  
         for (int i = 0; i < manager.call_number - 1; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 5; i++)
-            manager.color_button[i].SetActive(true);
+
         manager.pass = 0;
     }
     public void on_spade_button()
@@ -342,8 +312,7 @@ public class gamemanager : MonoBehaviour
         manager.call_number = want_number;
         for (int i = 0; i < manager.call_number-1; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 5; i++)
-            manager.color_button[i].SetActive(true);
+
         manager.pass = 0;
     }
 
@@ -353,8 +322,7 @@ public class gamemanager : MonoBehaviour
         manager.call_number = want_number;
         for (int i = 0; i < manager.call_number; i++)
             number_button[i].SetActive(false);
-        for (int i = 0; i < 5; i++)
-            manager.color_button[i].SetActive(true);
+
         manager.pass = 0;
     }
     public void on_pass_button()
@@ -367,10 +335,7 @@ public class gamemanager : MonoBehaviour
     }
     public void inactive_button()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            color_button[i].SetActive(true);
-        }
+
         for (int i = 0; i < 8; i++)
         {
             number_button[i].SetActive(true);
@@ -387,8 +352,13 @@ public class gamemanager : MonoBehaviour
             number_button[i].SetActive(false);
         }
     }
+
     public void on_all_color_button() 
     {
+        for (int i = 0; i < 5; i++)
+        {
+            manager.color_button[i].SetActive(false);
+        }
         manager.click_number++;
         if (manager.click_number % 4 == 0)
         {
