@@ -1,11 +1,15 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class buttoncontrol : MonoBehaviour
 {
+    
     public void on_start_button()
     {
+        gamemanager.manager.playing_player = 0;
         GameObject.Find("startbutton").SetActive(false);
         GameObject.Find("settingbutton").SetActive(false);
         gamemanager.manager.inactive_button();
@@ -14,6 +18,7 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.team_blue.SetActive(true);
         gamemanager.manager.pointer[0].SetActive(true);
         gamemanager.manager.Startcard();
+
     }
     public void on_setting_button()
     {
@@ -22,6 +27,7 @@ public class buttoncontrol : MonoBehaviour
 
     public void on_restart_button()
     {
+        gamemanager.manager.playing_player = 0;
         for (int i = 0; i < 4; i++)
             for (int k = 0; k < 13; k++)
                 DestroyImmediate(gamemanager.manager.player[i, k]);
@@ -33,8 +39,9 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.pointer[1].SetActive(false);
         gamemanager.manager.pointer[2].SetActive(false);
         gamemanager.manager.pointer[3].SetActive(false);
-        gamemanager.manager.Startcard();
         gamemanager.manager.reset_score();
+        gamemanager.manager.win_panel.SetActive(false);
+        gamemanager.manager.Startcard();
     }
     public void on_num_button1()
     {
@@ -125,7 +132,6 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.call_number = gamemanager.manager.want_number;
         for (int i = 0; i < gamemanager.manager.call_number; i++)
             gamemanager.manager.number_button[i].SetActive(false);
-
         gamemanager.manager.pass = 0;
     }
     public void on_pass_button()
@@ -134,6 +140,9 @@ public class buttoncontrol : MonoBehaviour
     }
     public void on_all_color_button()
     {
+        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
+        gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 1) % 4;
+        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
         for (int i = 0; i < 5; i++)
         {
             gamemanager.manager.color_button[i].SetActive(false);
@@ -161,7 +170,29 @@ public class buttoncontrol : MonoBehaviour
         }
         if (gamemanager.manager.pass == 3)
         {
+            gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
+            gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 3) % 4;
+            gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
+            gamemanager.manager.call_card_finish = true;
             gamemanager.manager.destroy_button();
+            if (gamemanager.manager.temp_king == 0)
+            {
+                gamemanager.manager.playing_player = 0;
+                for (int i = 0; i < 4; i++)
+                    for (int k = 0; k < 13; k++)
+                        DestroyImmediate(gamemanager.manager.player[i, k]);
+                gamemanager.manager.inactive_button();
+                gamemanager.manager.table.SetActive(true);
+                gamemanager.manager.team_red.SetActive(true);
+                gamemanager.manager.team_blue.SetActive(true);
+                gamemanager.manager.pointer[0].SetActive(true);
+                gamemanager.manager.pointer[1].SetActive(false);
+                gamemanager.manager.pointer[2].SetActive(false);
+                gamemanager.manager.pointer[3].SetActive(false);
+                gamemanager.manager.reset_score();
+                gamemanager.manager.win_panel.SetActive(false);
+                gamemanager.manager.Startcard();
+            }
             if (gamemanager.manager.temp_king == 1)
                 gamemanager.manager.king = "clover";
             if (gamemanager.manager.temp_king == 2)
@@ -170,39 +201,23 @@ public class buttoncontrol : MonoBehaviour
                 gamemanager.manager.king = "heart";
             if (gamemanager.manager.temp_king == 4)
                 gamemanager.manager.king = "spade";
+            if (gamemanager.manager.temp_king == 5)
+                gamemanager.manager.king = "mastercolor";
             for (int i = 0; i < 4; i++)
                 for (int k = 0; k < 13; k++)
                     if (gamemanager.manager.player[i, k].tag == gamemanager.manager.king)
                         gamemanager.manager.player[i, k].tag = "kingcolor";
-            if (gamemanager.manager.click_number % 4 == 0)
+            if (gamemanager.manager.click_number % 4 == 0|| gamemanager.manager.click_number % 4 == 2)
             {
                 gamemanager.manager.red_goal_score = gamemanager.manager.call_number + 6;
                 gamemanager.manager.blue_goal_score = 14 - gamemanager.manager.red_goal_score;
-                gamemanager.manager.pointer[3].SetActive(true);
-                gamemanager.manager.pointer[0].SetActive(false);
-            }
-            else if (gamemanager.manager.click_number % 4 == 1)
-            {
-                gamemanager.manager.blue_goal_score = gamemanager.manager.call_number + 6;
-                gamemanager.manager.red_goal_score = 14 - gamemanager.manager.blue_goal_score;
-                gamemanager.manager.pointer[0].SetActive(true);
-                gamemanager.manager.pointer[1].SetActive(false);
-            }
-            else if (gamemanager.manager.click_number % 4 == 2)
-            {
-                gamemanager.manager.red_goal_score = gamemanager.manager.call_number + 6;
-                gamemanager.manager.blue_goal_score = 14 - gamemanager.manager.red_goal_score;
-                gamemanager.manager.pointer[1].SetActive(true);
-                gamemanager.manager.pointer[2].SetActive(false);
             }
             else
             {
                 gamemanager.manager.blue_goal_score = gamemanager.manager.call_number + 6;
                 gamemanager.manager.red_goal_score = 14 - gamemanager.manager.blue_goal_score;
-                gamemanager.manager.pointer[2].SetActive(true);
-                gamemanager.manager.pointer[3].SetActive(false);
             }
-
         }
+        
     }
 }

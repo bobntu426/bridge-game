@@ -1,36 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class mousecontrol : MonoBehaviour
 {
     int templayer;
     Vector2 tempposition, tempscale;
-    bool ontable;
+    public bool ontable =false;
     public static string tempcolor;
 
 
     void OnMouseEnter()//滑鼠碰到牌的瞬間會做的事
     {
-        templayer = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-        tempscale = gameObject.transform.localScale;
+        if (ontable == false && gamemanager.manager.call_card_finish == true&&(gamemanager.manager.table_card_number == 0||gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        {
+            templayer = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+            tempscale = gameObject.transform.localScale;
+        }
     }
     void OnMouseOver() //滑鼠在持續接觸牌時會做的事
     {
-        if (ontable == false )
-        transform.localScale = gamemanager.manager.cardchoosescale[(int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x];
-        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13;
+        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        {
+            transform.localScale = gamemanager.manager.cardchoosescale[(int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x];
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13;
+        }
     }
     void OnMouseExit() //滑鼠離開牌的瞬間會做的事
     {
-        if (ontable == false)
+        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        {
             transform.localScale = tempscale;
-        gameObject.GetComponent<SpriteRenderer>().sortingOrder = templayer;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = templayer;
+        }
     }
     void OnMouseDrag() //滑鼠點著牌不放時會做的事
     {
         gamemanager.manager.mousepos = Camera.main.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-        if (ontable == false)
+        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
             transform.position = gamemanager.manager.mousepos;
     }
     void OnMouseDown() //滑鼠點擊牌的瞬間會做的事
@@ -101,17 +109,27 @@ public class mousecontrol : MonoBehaviour
             
             gamemanager.manager.table_card_number++;
             gamemanager.manager.table_card[gamemanager.manager.table_card_number - 1] = gameObject;
+            gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
+            gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 3) % 4;
+            gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
 
-            if (gamemanager.manager.table_card_number == 1 && gameObject.tag != "kingcolor")
+            if (gamemanager.manager.table_card_number == 1)
             {
-                tempcolor = gameObject.tag;
-                for (int i = 0; i < 4; i++)
-                    for (int k = 0; k < 13; k++)
-                        if (gamemanager.manager.player[i, k].tag == gameObject.tag)
-                        {
-                            gamemanager.manager.player[i, k].tag = "mastercolor";
-                        }
+                if (gameObject.tag != "kingcolor")
+                {
+                    tempcolor = gameObject.tag;
+                    for (int i = 0; i < 4; i++)
+                        for (int k = 0; k < 13; k++)
+                            if (gamemanager.manager.player[i, k].tag == tempcolor)
+                            {
+                                gamemanager.manager.player[i, k].tag = "mastercolor";
+                            }
+                    gamemanager.manager.must_color = gameObject.tag;
+                }
+                else
+                    gamemanager.manager.must_color = gameObject.tag;
             }
+
             if (gamemanager.manager.table_card_number == 4)
             {
                 gamemanager.manager.card_compare();
@@ -124,6 +142,21 @@ public class mousecontrol : MonoBehaviour
                         {
                             gamemanager.manager.player[i, k].tag = tempcolor;
                         }
+                if (gamemanager.manager.red_score == gamemanager.manager.red_goal_score) 
+                {
+                    gamemanager.manager.win_panel.SetActive(true);
+                    GameObject.Find("winner").GetComponent<Text>().text = "紅隊勝利";
+                }
+                if (gamemanager.manager.blue_score == gamemanager.manager.blue_goal_score)
+                {
+                    gamemanager.manager.win_panel.SetActive(true);
+                    GameObject.Find("winner").GetComponent<Text>().text = "藍隊勝利";
+                }
+                gamemanager.manager.blue_goal.GetComponent<Text>().text = "藍隊目標墩數：" + gamemanager.manager.blue_goal_score;
+                gamemanager.manager.red_goal.GetComponent<Text>().text = "紅隊目標墩數：" + gamemanager.manager.red_goal_score;
+                gamemanager.manager.red_team_score.GetComponent<Text>().text = "紅隊獲得墩數：" + gamemanager.manager.red_score;
+                gamemanager.manager.blue_team_score.GetComponent<Text>().text = "藍隊獲得墩數：" + gamemanager.manager.blue_score;
+                
             }
         }
     
