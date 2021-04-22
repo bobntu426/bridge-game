@@ -10,7 +10,7 @@ public class gameprocess : MonoBehaviour
 
     }
     void Update()
-    { 
+    {
 
     }
 }

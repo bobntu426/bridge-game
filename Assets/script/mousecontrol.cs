@@ -13,7 +13,7 @@ public class mousecontrol : MonoBehaviour
 
     void OnMouseEnter()//滑鼠碰到牌的瞬間會做的事
     {
-        if (ontable == false && gamemanager.manager.call_card_finish == true&&(gamemanager.manager.table_card_number == 0||gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        if (gamemanager.manager.can_be_select(ontable, gameObject) == true)
         {
             templayer = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
             tempscale = gameObject.transform.localScale;
@@ -21,15 +21,21 @@ public class mousecontrol : MonoBehaviour
     }
     void OnMouseOver() //滑鼠在持續接觸牌時會做的事
     {
-        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        //檢測那張牌能不能打，可以的話才能選取 
+        if (gamemanager.manager.can_be_select(ontable, gameObject) ==true)     
         {
+            //選取時牌變大，排在其他卡前面
             transform.localScale = gamemanager.manager.cardchoosescale[(int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x];
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13;
         }
+
+        //牌在桌面的話，要將牌變成已設定的大小(放上去一瞬間還是會變大最後一次，所以要加這行)
+        if (ontable ==true)
+                transform.localScale = gamemanager.manager.table_card_scale;
     }
     void OnMouseExit() //滑鼠離開牌的瞬間會做的事
     {
-        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        if (gamemanager.manager.can_be_select(ontable, gameObject) == true)
         {
             transform.localScale = tempscale;
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = templayer;
@@ -38,7 +44,7 @@ public class mousecontrol : MonoBehaviour
     void OnMouseDrag() //滑鼠點著牌不放時會做的事
     {
         gamemanager.manager.mousepos = Camera.main.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-        if (ontable == false && gamemanager.manager.call_card_finish == true && (gamemanager.manager.table_card_number == 0 || gameObject.tag == gamemanager.manager.must_color || gamemanager.manager.compute_color(gamemanager.manager.must_color, gameObject) == 0))
+        if (gamemanager.manager.can_be_select(ontable, gameObject) == true)
             transform.position = gamemanager.manager.mousepos;
     }
     void OnMouseDown() //滑鼠點擊牌的瞬間會做的事
@@ -50,65 +56,10 @@ public class mousecontrol : MonoBehaviour
         if (tablecontrol.istrigger == false)
         {
             transform.position = tempposition;
-        }
+        }//牌沒放到桌上
         else
         {
-            ontable = true;
-            if (gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x == 0)
-            {
-                
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                gamemanager.manager.handcardnum[0]--;
-                for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[0]; k++)
-                    gamemanager.manager.player_in_game[0, k] = gamemanager.manager.player_in_game[0, k + 1];
-                for (int i = 0; i < gamemanager.manager.handcardnum[0]; i++)
-                    gamemanager.manager.player_in_game[0, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[0] + gamemanager.manager.handcardlength[0] / 24 * (13 - gamemanager.manager.handcardnum[0]) + gamemanager.manager.handcardlength[0] / 12 * i, gamemanager.manager.cardverticalpos[0]);
-                gameObject.transform.position = new Vector2(0, -1.7f);
-                transform.localScale = new Vector2(2, 1.9f);
-            }
-            else if (gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x == 1)
-            {
-                
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                gamemanager.manager.handcardnum[1]--;
-                for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[1]; k++)
-                    gamemanager.manager.player_in_game[1, k] = gamemanager.manager.player_in_game[1, k + 1];
-                for (int i = 0; i < gamemanager.manager.handcardnum[1]; i++)
-                    gamemanager.manager.player_in_game[1, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[1], gamemanager.manager.leftcardhorizonpos[1] + gamemanager.manager.handcardlength[1] / 24 * (13 - gamemanager.manager.handcardnum[1]) + gamemanager.manager.handcardlength[1] / 12 * i);
-
-                gameObject.transform.position = new Vector2(1.5f, 0);
-                transform.localScale = new Vector2(2, 1.9f);
-
-
-            }
-            else if (gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x == 2)
-            {
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                gamemanager.manager.handcardnum[2]--;
-                for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[2]; k++)
-                    gamemanager.manager.player_in_game[2, k] = gamemanager.manager.player_in_game[2, k + 1];
-                for (int i = 0; i < gamemanager.manager.handcardnum[2]; i++)
-                    gamemanager.manager.player_in_game[2, i].transform.position = new Vector2(gamemanager.manager.leftcardhorizonpos[2] - gamemanager.manager.handcardlength[2] / 24 * (13 - gamemanager.manager.handcardnum[2]) - gamemanager.manager.handcardlength[2] / 12 * i, gamemanager.manager.cardverticalpos[2]);
-
-                gameObject.transform.position = new Vector2(0, 1.7f);
-                transform.localScale = new Vector2(2, 1.9f);
-
-            }
-            else
-            {
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                gamemanager.manager.handcardnum[3]--;
-                for (int k = (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player_in_game, gameObject).y; k < gamemanager.manager.handcardnum[3]; k++)
-                    gamemanager.manager.player_in_game[3, k] = gamemanager.manager.player_in_game[3, k + 1];
-                for (int i = 0; i < gamemanager.manager.handcardnum[3]; i++)
-                    gamemanager.manager.player_in_game[3, i].transform.position = new Vector2(gamemanager.manager.cardverticalpos[3], gamemanager.manager.leftcardhorizonpos[3] - gamemanager.manager.handcardlength[3] / 24 * (13 - gamemanager.manager.handcardnum[3]) - gamemanager.manager.handcardlength[3] / 12 * i);
-                gameObject.transform.position = new Vector2(-1.5f, 0);
-                transform.localScale = new Vector2(2, 1.9f);
-
-            }
-            
-            gamemanager.manager.table_card_number++;
-            gamemanager.manager.table_card[gamemanager.manager.table_card_number - 1] = gameObject;
+            gamemanager.manager.put_card_on_table(gameObject, ref ontable);
             gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
             gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 3) % 4;
             gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
@@ -125,23 +76,27 @@ public class mousecontrol : MonoBehaviour
                                 gamemanager.manager.player[i, k].tag = "mastercolor";
                             }
                     gamemanager.manager.must_color = gameObject.tag;
-                }
-                else
+                }//如果那張牌的花色不是王，那張牌的花色變成mastercolor，大家都得出那個花色
+                else//如果那張牌的花色是王，大家都得出王
                     gamemanager.manager.must_color = gameObject.tag;
-            }
+            }//打出的牌是第一張牌
 
             if (gamemanager.manager.table_card_number == 4)
             {
-                gamemanager.manager.card_compare();
+                gamemanager.manager.card_compare();//比大小
+
+                //把桌面的牌回收，牌數變回0
                 for (int i = 0; i < 4; i++)
                     gamemanager.manager.table_card[i].SetActive(false);
                 gamemanager.manager.table_card_number = 0;
+
+                //把原本tag設成mastercolor的牌的tag設回來
                 for (int i = 0; i < 4; i++)
                     for (int k = 0; k < 13; k++)
                         if (gamemanager.manager.player[i, k].tag == "mastercolor")
-                        {
                             gamemanager.manager.player[i, k].tag = tempcolor;
-                        }
+
+                //如果某隊達到目標分數，結束遊戲，顯示遊戲結果
                 if (gamemanager.manager.red_score == gamemanager.manager.red_goal_score) 
                 {
                     gamemanager.manager.win_panel.SetActive(true);
@@ -157,13 +112,7 @@ public class mousecontrol : MonoBehaviour
                 gamemanager.manager.red_team_score.GetComponent<Text>().text = "紅隊獲得墩數：" + gamemanager.manager.red_score;
                 gamemanager.manager.blue_team_score.GetComponent<Text>().text = "藍隊獲得墩數：" + gamemanager.manager.blue_score;
                 
-            }
-        }
-    
+            }//打出的牌是第四張牌
+        }//牌有放到桌上
     }
-    void Update()
-    {
-        
-    }
-
 }

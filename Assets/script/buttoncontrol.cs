@@ -17,6 +17,7 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.team_red.SetActive(true);
         gamemanager.manager.team_blue.SetActive(true);
         gamemanager.manager.pointer[0].SetActive(true);
+        gamemanager.manager.bride_game.SetActive(false);
         gamemanager.manager.Startcard();
 
     }
@@ -27,21 +28,7 @@ public class buttoncontrol : MonoBehaviour
 
     public void on_restart_button()
     {
-        gamemanager.manager.playing_player = 0;
-        for (int i = 0; i < 4; i++)
-            for (int k = 0; k < 13; k++)
-                DestroyImmediate(gamemanager.manager.player[i, k]);
-        gamemanager.manager.inactive_button();
-        gamemanager.manager.table.SetActive(true);
-        gamemanager.manager.team_red.SetActive(true);
-        gamemanager.manager.team_blue.SetActive(true);
-        gamemanager.manager.pointer[0].SetActive(true);
-        gamemanager.manager.pointer[1].SetActive(false);
-        gamemanager.manager.pointer[2].SetActive(false);
-        gamemanager.manager.pointer[3].SetActive(false);
-        gamemanager.manager.reset_score();
-        gamemanager.manager.win_panel.SetActive(false);
-        gamemanager.manager.Startcard();
+        gamemanager.manager.restart_card();
     }
     public void on_num_button1()
     {
@@ -147,27 +134,6 @@ public class buttoncontrol : MonoBehaviour
         {
             gamemanager.manager.color_button[i].SetActive(false);
         }
-        gamemanager.manager.click_number++;
-        if (gamemanager.manager.click_number % 4 == 0)
-        {
-            gamemanager.manager.pointer[0].SetActive(true);
-            gamemanager.manager.pointer[3].SetActive(false);
-        }
-        if (gamemanager.manager.click_number % 4 == 1)
-        {
-            gamemanager.manager.pointer[1].SetActive(true);
-            gamemanager.manager.pointer[0].SetActive(false);
-        }
-        if (gamemanager.manager.click_number % 4 == 2)
-        {
-            gamemanager.manager.pointer[2].SetActive(true);
-            gamemanager.manager.pointer[1].SetActive(false);
-        }
-        if (gamemanager.manager.click_number % 4 == 3)
-        {
-            gamemanager.manager.pointer[3].SetActive(true);
-            gamemanager.manager.pointer[2].SetActive(false);
-        }
         if (gamemanager.manager.pass == 3)
         {
             gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
@@ -177,46 +143,9 @@ public class buttoncontrol : MonoBehaviour
             gamemanager.manager.destroy_button();
             if (gamemanager.manager.temp_king == 0)
             {
-                gamemanager.manager.playing_player = 0;
-                for (int i = 0; i < 4; i++)
-                    for (int k = 0; k < 13; k++)
-                        DestroyImmediate(gamemanager.manager.player[i, k]);
-                gamemanager.manager.inactive_button();
-                gamemanager.manager.table.SetActive(true);
-                gamemanager.manager.team_red.SetActive(true);
-                gamemanager.manager.team_blue.SetActive(true);
-                gamemanager.manager.pointer[0].SetActive(true);
-                gamemanager.manager.pointer[1].SetActive(false);
-                gamemanager.manager.pointer[2].SetActive(false);
-                gamemanager.manager.pointer[3].SetActive(false);
-                gamemanager.manager.reset_score();
-                gamemanager.manager.win_panel.SetActive(false);
-                gamemanager.manager.Startcard();
+                gamemanager.manager.restart_card();
             }
-            if (gamemanager.manager.temp_king == 1)
-                gamemanager.manager.king = "clover";
-            if (gamemanager.manager.temp_king == 2)
-                gamemanager.manager.king = "diamond";
-            if (gamemanager.manager.temp_king == 3)
-                gamemanager.manager.king = "heart";
-            if (gamemanager.manager.temp_king == 4)
-                gamemanager.manager.king = "spade";
-            if (gamemanager.manager.temp_king == 5)
-                gamemanager.manager.king = "mastercolor";
-            for (int i = 0; i < 4; i++)
-                for (int k = 0; k < 13; k++)
-                    if (gamemanager.manager.player[i, k].tag == gamemanager.manager.king)
-                        gamemanager.manager.player[i, k].tag = "kingcolor";
-            if (gamemanager.manager.click_number % 4 == 0|| gamemanager.manager.click_number % 4 == 2)
-            {
-                gamemanager.manager.red_goal_score = gamemanager.manager.call_number + 6;
-                gamemanager.manager.blue_goal_score = 14 - gamemanager.manager.red_goal_score;
-            }
-            else
-            {
-                gamemanager.manager.blue_goal_score = gamemanager.manager.call_number + 6;
-                gamemanager.manager.red_goal_score = 14 - gamemanager.manager.blue_goal_score;
-            }
+            gamemanager.manager.after_call_card();
         }
         
     }

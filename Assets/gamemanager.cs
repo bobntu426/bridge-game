@@ -4,23 +4,27 @@ using UnityEngine.UI;
 public class gamemanager : MonoBehaviour
 {
     public static gamemanager manager;
-    public GameObject table, team_red, team_blue,win_panel, red_goal, red_team_score, blue_team_score, blue_goal, restart_button;//遊戲畫面上的桌子、顯示隊伍分數的文字、獲勝的畫布、兩隊目標分數與獲得分數的顯示文字UI、遊戲進行中的重新遊戲按鈕
-    public GameObject[] Poker, number_button, color_button,pointer,table_card;//儲存所有撲克牌元素的陣列、喊數字的按鈕、喊花色的按鈕、打在桌上的牌
-    public GameObject[,] player, player_in_game;
-    public Button startgame;
-    public Vector2 mousepos;
-    public Vector2[] cardnormalscale, cardchoosescale;
-    public int[] card_number;//紀錄
+
+    //遊戲畫面上的桌子、顯示隊伍分數的文字、獲勝的畫布、兩隊目標分數與獲得分數的顯示文字UI、遊戲進行中的重新遊戲按鈕
+    public GameObject table, team_red, team_blue, win_panel, red_goal, red_team_score, blue_team_score, blue_goal, restart_button, bride_game;
+    
+    public GameObject[] Poker, number_button, color_button, pointer, table_card;//儲存所有撲克牌元素的陣列、喊數字的按鈕、喊花色的按鈕、打在桌上的牌
+    public GameObject[,] player, player_in_game;//紀錄各玩家擁有的牌、遊戲中會隨著玩家出牌而變動的牌陣列
+    public Button startgame;//開始遊戲的按鈕
+    public Vector2 mousepos,table_card_scale;//滑鼠座標、牌在桌面上時會變成的大小
+    public Vector2[] cardnormalscale, cardchoosescale;//各張牌在四位玩家中的的大小、被選取時的大小
+    public int[] card_number;//牌桌上放置的牌
 
     //四位玩家的手牌總物理長度、最左邊的手牌的橫向位置(玩家0、2為x軸大小，玩家1、3為y軸大小)、四位玩家手牌的縱向位置(玩家0、2為y軸大小，玩家1、3為x軸大小)
     public float[] handcardlength, leftcardhorizonpos, cardverticalpos;
+
     public int[] handcardnum;//四位玩家的手牌數量
-    public int red_score, blue_score,red_goal_score,blue_goal_score;//兩隊吃的墩數、兩隊目標墩數
+    public int red_score, blue_score, red_goal_score, blue_goal_score;//兩隊吃的墩數、兩隊目標墩數
     public int call_number, want_number;//喊牌當下叫的數字兼最終喊到的數字，暫時喊到的數字
-    public int pass,temp_king,want_king,click_number;//喊pass的次數、正在喊牌的玩家、暫時喊到的花色、喊牌當下要叫的花色、點擊顏色按鈕的次數
-    public int table_card_number,playing_player;//桌上已打的牌數、輪到做事的玩家
+    public int pass, temp_king, want_king;//喊pass的次數、正在喊牌的玩家、暫時喊到的花色、喊牌當下要叫的花色
+    public int table_card_number, playing_player;//桌上已打的牌數、輪到做事的玩家
     public string king;//最終喊到的花色
-    public bool call_card_finish;
+    public bool call_card_finish;//是否喊牌結束了
     public string must_color;//手牌中有就一定要打出的花色
 
 
@@ -34,6 +38,7 @@ public class gamemanager : MonoBehaviour
 
     public void Startcard()
     {
+        //將各項變數重製更新
         short[,] playerindex = new short[4, 13];
         short[] index = new short[52];
         short b, k, temp, i, f, rcard;
@@ -45,18 +50,14 @@ public class gamemanager : MonoBehaviour
         call_number = 1;
         temp_king = 0;
         pass = 0;
-        click_number = 0;
         table_card_number = 0;
         call_card_finish = false;
-        for (i = 0; i < 52; i++) 
-            if (i < 13)
-                Poker[i].tag = "clover";
-            else if (i < 26)
-                Poker[i].tag = "diamond";
-            else if (i < 39)
-                Poker[i].tag = "heart";
-            else
-                Poker[i].tag = "spade";
+        blue_score = 0;
+        red_score = 0;
+
+        color_distribute();//把每張牌標上花色
+
+        //隨機分配各張牌的index到各玩家手中
         for (i = 0; i < 52; i++)
             index[i] = i;
         for (i = 0; i < 52; i++)
@@ -74,6 +75,7 @@ public class gamemanager : MonoBehaviour
             for (k = b; k < rcard; k++)
                 index[k] = index[k + 1];
         }
+
         for (k = 0; k < 4; k++)
         {
             for (b = 0; b < 12; b++)
@@ -87,7 +89,7 @@ public class gamemanager : MonoBehaviour
                         playerindex[k, f + 1] = temp;
                     }
                 }
-            }
+            }//把每位玩家手中的牌的index排序
             for (i = 0; i < 13; i++)
             {
                 Instantiate(Poker[playerindex[k, i]], new Vector2(-0.63f, 0.09f), Quaternion.identity);
@@ -118,13 +120,9 @@ public class gamemanager : MonoBehaviour
                 player[k, i].GetComponent<BoxCollider2D>().isTrigger = true;
                 player[k, i].AddComponent<mousecontrol>();
                 player_in_game[k, i] = player[k, i];
-            }
-        }
-    }
-    public void call_card()
-    {
-        pass = 0;
-    }
+            }//依照index把各張牌分配到各玩家手中，並設好位置、屬性
+        }//把每位玩家手中的牌的index排序，並依照index把各張牌分配到各玩家手中，並設好位置、屬性
+    }//開始一場遊戲，重製各項數據，把牌發好整理到各玩家手中
     
     public Vector2 cardtoplayer(GameObject[,] player, GameObject poker)
     {
@@ -139,26 +137,22 @@ public class gamemanager : MonoBehaviour
         print("no person own the card");
         a = new Vector2(-1, -1);
         return a;
-    }
+    }//傳回該牌所屬的玩家編號和該牌為手牌中左邊數來第幾張牌
     public void red_getscore()
     {
         manager.red_score++;
         GameObject.Find("teamred").GetComponent<Text>().text = "紅隊墩數：" + manager.red_score;
-    }
+    }//紅隊得分時要做的事
     public void blue_getscore()
     {
         manager.blue_score++;
         GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + manager.blue_score;
-    }
+    }//藍隊得分時要做的事
     public void reset_score()
     {
         GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + 0;
         GameObject.Find("teamred").GetComponent<Text>().text = "紅隊墩數：" + 0;
-    }
-    public void gameplay()
-    {
-
-    }
+    }//將兩隊墩數顯示重製為0
 
     public int number_of_card(GameObject card)
     {
@@ -166,7 +160,7 @@ public class gamemanager : MonoBehaviour
             if (Poker[i].name + "(Clone)" == card.name)
                 return i;
         return -1;
-    }
+    }//傳回某張牌的數字
     public void card_compare()
     {
         bool big;
@@ -196,7 +190,7 @@ public class gamemanager : MonoBehaviour
             }
         }
 
-        if (cardtoplayer(player, table_card[3]).x == 0|| cardtoplayer(player, table_card[3]).x == 2)
+        if (cardtoplayer(player, table_card[3]).x == 0 || cardtoplayer(player, table_card[3]).x == 2)
         {
             red_getscore();
             pointer[playing_player].SetActive(false);
@@ -226,10 +220,9 @@ public class gamemanager : MonoBehaviour
                 pointer[3].SetActive(true);
             }
         }
+    }//打完一輪牌後，結算誰吃到墩，把分數計算好，開始下回合。
 
-    }
 
-   
     public void inactive_button()
     {
 
@@ -238,7 +231,7 @@ public class gamemanager : MonoBehaviour
             number_button[i].SetActive(true);
         }
         restart_button.SetActive(true);
-    }
+    }//設置開始喊牌的按鈕
     public void destroy_button()
     {
         for (int i = 0; i < 6; i++)
@@ -249,16 +242,158 @@ public class gamemanager : MonoBehaviour
         {
             number_button[i].SetActive(false);
         }
-    }
-    public int compute_color(string color,GameObject a) 
+    }//消除所有喊牌的按鈕
+    public int compute_color(string color, int player)
     {
-        int num=0,player_num= (int)cardtoplayer(player, a).x;
-        for (int i = 0; i < handcardnum[player_num]; i++)
+        int num = 0;
+        for (int i = 0; i < handcardnum[player]; i++)
         {
-            if (player_in_game[player_num, i].tag == color)
+            if (player_in_game[player, i].tag == color)
                 num++;
         }
         return num;
-    }
+    }//傳回某一花色在某一玩家手中的數量
+    public void put_card_on_table(GameObject gameObject,ref bool ontable)
+        {
+        ontable = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        //把牌打出去後，player_in_game陣列中移除該張牌、手中剩下的牌重新喬好位置
+        if (cardtoplayer(player, gameObject).x == 0)
+        {
+            
+            handcardnum[0]--;
+            for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[0]; k++)
+                player_in_game[0, k] = player_in_game[0, k + 1];
+            for (int i = 0; i < handcardnum[0]; i++)
+                player_in_game[0, i].transform.position = new Vector2(leftcardhorizonpos[0] + handcardlength[0] / 24 * (13 - handcardnum[0]) + handcardlength[0] / 12 * i, cardverticalpos[0]);
+            gameObject.transform.position = new Vector2(0, -1.7f);
+            transform.localScale = table_card_scale;
+        }
+        else if (cardtoplayer(player, gameObject).x == 1)
+        {
+            handcardnum[1]--;
+            for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[1]; k++)
+                player_in_game[1, k] = player_in_game[1, k + 1];
+            for (int i = 0; i < handcardnum[1]; i++)
+                player_in_game[1, i].transform.position = new Vector2(cardverticalpos[1], leftcardhorizonpos[1] + handcardlength[1] / 24 * (13 - handcardnum[1]) + handcardlength[1] / 12 * i);
+
+            gameObject.transform.position = new Vector2(1.5f, 0);
+            transform.localScale = table_card_scale;
+
+
+        }
+        else if (cardtoplayer(player, gameObject).x == 2)
+        {
+            handcardnum[2]--;
+            for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[2]; k++)
+                player_in_game[2, k] = player_in_game[2, k + 1];
+            for (int i = 0; i < handcardnum[2]; i++)
+                player_in_game[2, i].transform.position = new Vector2(leftcardhorizonpos[2] - handcardlength[2] / 24 * (13 - handcardnum[2]) - handcardlength[2] / 12 * i, cardverticalpos[2]);
+
+            gameObject.transform.position = new Vector2(0, 1.7f);
+            transform.localScale = table_card_scale;
+
+        }
+        else
+        {
+            handcardnum[3]--;
+            for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[3]; k++)
+                player_in_game[3, k] = player_in_game[3, k + 1];
+            for (int i = 0; i < handcardnum[3]; i++)
+                player_in_game[3, i].transform.position = new Vector2(cardverticalpos[3], leftcardhorizonpos[3] - handcardlength[3] / 24 * (13 - handcardnum[3]) - handcardlength[3] / 12 * i);
+            gameObject.transform.position = new Vector2(-1.5f, 0);
+        }
+
+        table_card[table_card_number] = gameObject;//將該張牌放到儲存桌面上的牌的陣列
+        table_card_number++;
+    }//把手中的牌拖拉到桌上會觸發的動作，需同時傳上該腳本的ontable參數
+    public void after_call_card()
+    {
+        //決定王
+        if (temp_king == 1)
+            king = "clover";
+        if (temp_king == 2)
+            king = "diamond";
+        if (temp_king == 3)
+            king = "heart";
+        if (temp_king == 4)
+            king = "spade";
+        if (temp_king == 5)
+            king = "mastercolor";
+
+        //把王的花色的tag改成kingcolor
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                if (player[i, k].tag == king)
+                    player[i, k].tag = "kingcolor";
+
+        if (playing_player == 0 || playing_player % 4 == 2)
+        {
+            blue_goal_score = call_number + 6;
+            red_goal_score = 14 - blue_goal_score;
+        }//藍隊喊到
+        else
+        {
+            red_goal_score = call_number + 6;
+            blue_goal_score = 14 - red_goal_score;
+        }//紅隊喊到
+    }//喊玩牌後根據喊牌內容設定好規則
+    public void restart_card() 
+    {
+        playing_player = 0;
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                DestroyImmediate(player[i, k]);
+        inactive_button();
+        table.SetActive(true);
+        team_red.SetActive(true);
+        team_blue.SetActive(true);
+        pointer[0].SetActive(true);
+        pointer[1].SetActive(false);
+        pointer[2].SetActive(false);
+        pointer[3].SetActive(false);
+        reset_score();
+        win_panel.SetActive(false);
+        Startcard();
+    }//重新開始遊戲
+    public void color_distribute() 
+    {
+        for (int i = 0; i < 52; i++)
+            if (i < 13)
+                Poker[i].tag = "clover";
+            else if (i < 26)
+                Poker[i].tag = "diamond";
+            else if (i < 39)
+                Poker[i].tag = "heart";
+            else
+                Poker[i].tag = "spade";
+    }//把每張牌標上花色
+    public bool can_be_select(bool ontable ,GameObject gameObject) 
+    {
+        if (
+                ontable == false //不在桌上
+                &&
+                gamemanager.manager.call_card_finish == true //喊完牌了才能打牌
+                &&
+                (
+                    //在特定情況下有某些花色不能打
+                    gamemanager.manager.table_card_number == 0 //第一個人出牌可以出任何花色
+                    ||
+                    gameObject.tag == gamemanager.manager.must_color //只能出跟第一個人一樣的花色
+                    ||
+
+                    //手中如果該花色沒了就可以切牌或墊牌
+                    gamemanager.manager.compute_color(gamemanager.manager.must_color, (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x) == 0
+                )
+                &&
+                //輪到該玩家才能出牌
+                (int)gamemanager.manager.cardtoplayer(gamemanager.manager.player, gameObject).x == gamemanager.manager.playing_player
+            )
+            return true;
+        else
+            return false;
+    }//檢測那張牌能不能打，可以的話才能選取
+
 }
 
