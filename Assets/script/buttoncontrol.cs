@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class buttoncontrol : MonoBehaviour
@@ -18,17 +19,19 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.team_blue.SetActive(true);
         gamemanager.manager.pointer[0].SetActive(true);
         gamemanager.manager.bride_game.SetActive(false);
-        gamemanager.manager.Startcard();
-
+        gamemanager.manager.Startcard(); 
     }
     public void on_setting_button()
     {
-
+        gamemanager.manager.AI_mode = true;
     }
 
     public void on_restart_button()
     {
         gamemanager.manager.restart_card();
+        AI_control.ontable1 = new bool[13];
+        AI_control.ontable2 = new bool[13];
+        AI_control.ontable3 = new bool[13];
     }
     public void on_num_button1()
     {
@@ -78,6 +81,7 @@ public class buttoncontrol : MonoBehaviour
     {
         gamemanager.manager.call_number = gamemanager.manager.want_number;
         gamemanager.manager.temp_king = 1;
+        gamemanager.manager.playerUI_control("梅花");
         for (int i = 0; i < gamemanager.manager.call_number - 1; i++)
             gamemanager.manager.number_button[i].SetActive(false);
 
@@ -87,7 +91,7 @@ public class buttoncontrol : MonoBehaviour
     {
         gamemanager.manager.temp_king = 2;
         gamemanager.manager.call_number = gamemanager.manager.want_number;
-
+        gamemanager.manager.playerUI_control("磚塊");
         for (int i = 0; i < gamemanager.manager.call_number - 1; i++)
             gamemanager.manager.number_button[i].SetActive(false);
 
@@ -97,7 +101,7 @@ public class buttoncontrol : MonoBehaviour
     {
         gamemanager.manager.temp_king = 3;
         gamemanager.manager.call_number = gamemanager.manager.want_number;
-
+        gamemanager.manager.playerUI_control("愛心");
         for (int i = 0; i < gamemanager.manager.call_number - 1; i++)
             gamemanager.manager.number_button[i].SetActive(false);
 
@@ -107,6 +111,8 @@ public class buttoncontrol : MonoBehaviour
     {
         gamemanager.manager.temp_king = 4;
         gamemanager.manager.call_number = gamemanager.manager.want_number;
+        gamemanager.manager.playerUI_control("黑桃"); 
+
         for (int i = 0; i < gamemanager.manager.call_number - 1; i++)
             gamemanager.manager.number_button[i].SetActive(false);
 
@@ -117,6 +123,7 @@ public class buttoncontrol : MonoBehaviour
     {
         gamemanager.manager.temp_king = 5;
         gamemanager.manager.call_number = gamemanager.manager.want_number;
+        gamemanager.manager.playerUI_control("無王");
         for (int i = 0; i < gamemanager.manager.call_number; i++)
             gamemanager.manager.number_button[i].SetActive(false);
         gamemanager.manager.pass = 0;
@@ -124,16 +131,7 @@ public class buttoncontrol : MonoBehaviour
     public void on_pass_button()
     {
         gamemanager.manager.pass++;
-    }
-    public void on_all_color_button()
-    {
-        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
-        gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 1) % 4;
-        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
-        for (int i = 0; i < 5; i++)
-        {
-            gamemanager.manager.color_button[i].SetActive(false);
-        }
+        gamemanager.manager.player_call_card[(gamemanager.manager.playing_player + 3) % 4].GetComponent<Text>().text = "pass";
         if (gamemanager.manager.pass == 3)
         {
             gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
@@ -141,12 +139,41 @@ public class buttoncontrol : MonoBehaviour
             gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
             gamemanager.manager.call_card_finish = true;
             gamemanager.manager.destroy_button();
-            if (gamemanager.manager.temp_king == 0)
+            for (int i = 0; i < 4; i++)
             {
-                gamemanager.manager.restart_card();
+                gamemanager.manager.playerUI[i].SetActive(false);
+                gamemanager.manager.player_call_card[i].SetActive(false);
             }
-            gamemanager.manager.after_call_card();
+            
+            //沒人喊牌就重發牌
+            if (gamemanager.manager.temp_king == 0)
+                gamemanager.manager.restart_card();
+            else
+                gamemanager.manager.after_call_card();
         }
-        
+    }
+    public void on_all_color_button()
+    {
+        if (gamemanager.manager.AI_mode == true)
+            if (gamemanager.manager.playing_player != 3)
+            {
+                foreach (GameObject i in gamemanager.manager.number_button)
+                    i.GetComponent<Button>().interactable = false;
+                foreach (GameObject i in gamemanager.manager.color_button)
+                    i.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                foreach (GameObject i in gamemanager.manager.number_button)
+                    i.GetComponent<Button>().interactable = true;
+                foreach (GameObject i in gamemanager.manager.color_button)
+                    i.GetComponent<Button>().interactable = true;
+            }
+
+        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(false);
+        gamemanager.manager.playing_player = (gamemanager.manager.playing_player + 1) % 4;
+        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);
+        for (int i = 0; i < 5; i++)
+            gamemanager.manager.color_button[i].SetActive(false);
     }
 }

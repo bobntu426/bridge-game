@@ -60,6 +60,7 @@
     <Compile Include="Assets\script\buttoncontrol.cs" />
     <Compile Include="Assets\script\tablecontrol.cs" />
     <Compile Include="Assets\script\gameprocess.cs" />
+    <Compile Include="Assets\script\AI_control.cs" />
     <Compile Include="Assets\script\mousecontrol.cs" />
   </ItemGroup>
   <ItemGroup>
