@@ -8,8 +8,8 @@ public class gamemanager : MonoBehaviour
     //遊戲畫面上的桌子、顯示隊伍分數的文字、獲勝的畫布、兩隊目標分數與獲得分數的顯示文字UI、遊戲進行中的重新遊戲按鈕
     public GameObject table, team_red, team_blue, win_panel, red_goal, red_team_score, blue_team_score, blue_goal, restart_button, bride_game
 
-        //遊戲進行中的兩隊目標墩數文字UI、顯示王的文字UI、管理AI叫牌的物件
-        , red_goal_UI, blue_goal_UI, king_UI,AI_control,AI_pointer;
+        //遊戲進行中的兩隊目標墩數文字UI、顯示王的文字UI、管理AI叫牌的物件、AI模式的按鈕、單人操縱模式的按鈕、返回主頁面的按鈕、開始的按鈕、遊戲設定按鈕
+        , red_goal_UI, blue_goal_UI, king_UI,AI_control,AI_pointer, AI_mode_button,one_player_button,return_button, startbutton, setting_button;
 
     //儲存所有撲克牌元素的陣列、喊數字的按鈕、喊花色的按鈕、打在桌上的牌、各玩家喊了甚麼的顯示字體UI、顯示player文字的UI
     public GameObject[] Poker, number_button, color_button, pointer, table_card,player_call_card,playerUI;

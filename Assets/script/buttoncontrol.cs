@@ -19,13 +19,17 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.team_blue.SetActive(true);
         gamemanager.manager.pointer[0].SetActive(true);
         gamemanager.manager.bride_game.SetActive(false);
+        gamemanager.manager.return_button.SetActive(false);
         gamemanager.manager.Startcard(); 
     }
     public void on_setting_button()
     {
-        gamemanager.manager.AI_mode = true;
+        gamemanager.manager.AI_mode_button.SetActive(true);
+        gamemanager.manager.one_player_button.SetActive(true);
+        gamemanager.manager.return_button.SetActive(true);
+        gamemanager.manager.startbutton.SetActive(false);
+        gamemanager.manager.setting_button.SetActive(false);
     }
-
     public void on_restart_button()
     {
         gamemanager.manager.restart_card();
@@ -176,4 +180,21 @@ public class buttoncontrol : MonoBehaviour
         for (int i = 0; i < 5; i++)
             gamemanager.manager.color_button[i].SetActive(false);
     }
+
+    public void on_AI_mode_button() 
+    {
+        gamemanager.manager.AI_mode = true;
+    }
+    public void on_one_player_button()
+    {
+        gamemanager.manager.AI_mode = false;
+    }
+    public void on_return_button() 
+    {
+        gamemanager.manager.startbutton.SetActive(true);
+        gamemanager.manager.setting_button.SetActive(true);
+        gamemanager.manager.one_player_button.SetActive(false);
+        gamemanager.manager.AI_mode_button.SetActive(false);
+    }
+
 }
