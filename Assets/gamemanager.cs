@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class gamemanager : MonoBehaviour
 {
     public static gamemanager manager;
@@ -9,7 +10,7 @@ public class gamemanager : MonoBehaviour
     public GameObject table, team_red, team_blue, win_panel, red_goal, red_team_score, blue_team_score, blue_goal, restart_button, bride_game
 
         //遊戲進行中的兩隊目標墩數文字UI、顯示王的文字UI、管理AI叫牌的物件、AI模式的按鈕、單人操縱模式的按鈕、返回主頁面的按鈕、開始的按鈕、遊戲設定按鈕
-        , red_goal_UI, blue_goal_UI, king_UI,AI_control,AI_pointer, AI_mode_button,one_player_button,return_button, startbutton, setting_button;
+        , red_goal_UI, blue_goal_UI, king_UI,AI_control,AI_pointer, AI_mode_button,one_player_button,return_button, startbutton, setting_button,net_mode_button,netgamemanager,network_manager;
 
     //儲存所有撲克牌元素的陣列、喊數字的按鈕、喊花色的按鈕、打在桌上的牌、各玩家喊了甚麼的顯示字體UI、顯示player文字的UI
     public GameObject[] Poker, number_button, color_button, pointer, table_card,player_call_card,playerUI;
@@ -29,7 +30,7 @@ public class gamemanager : MonoBehaviour
     public int pass, temp_king, want_king;//喊pass的次數、正在喊牌的玩家、暫時喊到的花色、喊牌當下要叫的花色
     public int table_card_number, playing_player;//桌上已打的牌數、輪到做事的玩家
     public string king;//最終喊到的花色
-    public bool call_card_finish,AI_mode;//是否喊牌結束了、是否是電腦自動出牌模式
+    public bool call_card_finish,AI_mode,net_mode;//是否喊牌結束了、是否是電腦自動出牌模式、是否是網路連線模式
     public string must_color, temp_color;//手牌中有就一定要打出的花色、暫存用的花色變數
 
 
@@ -84,6 +85,10 @@ public class gamemanager : MonoBehaviour
             foreach (GameObject h in color_button)
                 h.GetComponent<Button>().interactable = true;
         }
+        if (net_mode == true) 
+        {
+            GameObject[] player = new GameObject[4];
+        }
 
 
         color_distribute();//把每張牌標上花色
@@ -121,8 +126,10 @@ public class gamemanager : MonoBehaviour
                     }
                 }
             }//把每位玩家手中的牌的index排序
+
             for (i = 0; i < 13; i++)
             {
+                
                 Instantiate(Poker[playerindex[k, i]], new Vector2(-0.63f, 0.09f), Quaternion.identity);
                 player[k, i] = GameObject.Find(Poker[playerindex[k, i]].name + "(Clone)");
                 player[k, i].transform.Rotate(new Vector3(0, 0, 90 * k));

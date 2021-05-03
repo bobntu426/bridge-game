@@ -7,26 +7,38 @@ using UnityEngine.UI;
 
 public class buttoncontrol : MonoBehaviour
 {
-    
+    private void Start()
+    {
+        netmode = false;
+    }
+    public bool netmode;
     public void on_start_button()
     {
         gamemanager.manager.playing_player = 0;
         GameObject.Find("startbutton").SetActive(false);
         GameObject.Find("settingbutton").SetActive(false);
         gamemanager.manager.inactive_button();
-        gamemanager.manager.table.SetActive(true);
+        Instantiate(gamemanager.manager.table, new Vector2(0, 0), Quaternion.identity);
         gamemanager.manager.team_red.SetActive(true);
         gamemanager.manager.team_blue.SetActive(true);
         gamemanager.manager.pointer[0].SetActive(true);
         gamemanager.manager.bride_game.SetActive(false);
         gamemanager.manager.return_button.SetActive(false);
-        gamemanager.manager.Startcard(); 
+        gamemanager.manager.Startcard();
+        if (netmode == true)
+        {
+            catch_netid.m = 0;
+            catch_netid.n = 0;
+            catch_netid.playerid = new uint[4, 13];
+            netgamemanager.netmanager.g = 0;
+        }
     }
     public void on_setting_button()
     {
         gamemanager.manager.AI_mode_button.SetActive(true);
         gamemanager.manager.one_player_button.SetActive(true);
         gamemanager.manager.return_button.SetActive(true);
+        gamemanager.manager.net_mode_button.SetActive(true);
         gamemanager.manager.startbutton.SetActive(false);
         gamemanager.manager.setting_button.SetActive(false);
     }
@@ -195,6 +207,14 @@ public class buttoncontrol : MonoBehaviour
         gamemanager.manager.setting_button.SetActive(true);
         gamemanager.manager.one_player_button.SetActive(false);
         gamemanager.manager.AI_mode_button.SetActive(false);
+        gamemanager.manager.net_mode_button.SetActive(false);
     }
-
+    public void on_netmode_button()
+    {
+        gamemanager.manager.net_mode_button.SetActive(false);
+        gamemanager.manager.AI_mode_button.SetActive(false);
+        gamemanager.manager.one_player_button.SetActive(false);
+        gamemanager.manager.bride_game.SetActive(false);
+        gamemanager.manager.restart_button.SetActive(false);
+    }
 }
