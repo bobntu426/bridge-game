@@ -24,8 +24,9 @@ public class netgamemanager : NetworkBehaviour
     
 
     //四位玩家的手牌總物理長度、最左邊的手牌的橫向位置(玩家0、2為x軸大小，玩家1、3為y軸大小)、四位玩家手牌的縱向位置(玩家0、2為y軸大小，玩家1、3為x軸大小)
-    public float[] handcardlength, leftcardhorizonpos, cardverticalpos;
-    public int[] handcardnum,card_number;//四位玩家的手牌數量、牌桌上放置的牌
+    public float[] handcardlength, leftcardhorizonpos, cardverticalpos,start_y_pos;
+    
+    public int[] handcardnum, card_number;//四位玩家的手牌數量、牌桌上放置的牌
     [SyncVar]
     public int red_score, blue_score, red_goal_score, blue_goal_score, call_number, want_number,pass, temp_king, want_king, table_card_number, playing_player;
     //兩隊吃的墩數、兩隊目標墩數、喊牌當下叫的數字兼最終喊到的數字，暫時喊到的數字、喊pass的次數、正在喊牌的玩家、暫時喊到的花色、喊牌當下要叫的花色、桌上已打的牌數、輪到做事的玩家
@@ -52,16 +53,14 @@ public class netgamemanager : NetworkBehaviour
         catch_netid.m = 0;
         catch_netid.n = 0;
         catch_netid.playerid = new uint[4, 13];
-        netgamemanager.netmanager.g = 0;
-        handcardnum=new int[] {0,0,0,0};
+        g = 0; 
         playing_player = 0; 
-        card_number= new int[] { 0, 0, 0, 0 };
     }
 
 
     private void Update()
     {
-        
+
     }
     public void start_card()
     {
@@ -71,7 +70,8 @@ public class netgamemanager : NetworkBehaviour
         short b, k, temp, i, f, rcard;
         player = new GameObject[4, 13];
         rcard = 52;
-        handcardnum = new int[4];
+        handcardnum = new int[] { 13, 13, 13, 13 };
+        card_number = new int[] {0, 0, 0, 0};
         table_card = new GameObject[4];
         player_in_game = new GameObject[4, 13];
         call_number = 1;
@@ -84,6 +84,7 @@ public class netgamemanager : NetworkBehaviour
         catch_netid.playerid = new uint[4, 13];
         catch_netid.m = 0;
         catch_netid.n = 0;
+
 
 
 
@@ -157,7 +158,7 @@ public class netgamemanager : NetworkBehaviour
             {
 
                 player[k, i] = NetworkIdentity.spawned[catch_netid.playerid[k, i]].gameObject;
-                player_in_game[k, i] = player[k, i];
+                player_in_game[k, i] = NetworkIdentity.spawned[catch_netid.playerid[k, i]].gameObject; 
             }
 
         }
@@ -177,8 +178,8 @@ public class netgamemanager : NetworkBehaviour
         {
             for (int i = 0; i < 13; i++)
             {
-                if (gamemanager.manager.number_of_card(a.player[player, i]) >= 0 && gamemanager.manager.number_of_card(a.player[player, i]) < 13 && gamemanager.manager.number_of_card(a.player[player, i]) - 8 > 0)
-                    point += (gamemanager.manager.number_of_card(a.player[player, i]) - 8);
+                if (number_of_card(a.player[player, i]) >= 0 && number_of_card(a.player[player, i]) < 13 && number_of_card(a.player[player, i]) - 8 > 0)
+                    point += (number_of_card(a.player[player, i]) - 8);
             }
             return point;
         }
@@ -187,8 +188,8 @@ public class netgamemanager : NetworkBehaviour
 
             for (int i = 0; i < 13; i++)
             {
-                if (gamemanager.manager.number_of_card(a.player[player, i]) >= 13 && gamemanager.manager.number_of_card(a.player[player, i]) < 26 && gamemanager.manager.number_of_card(a.player[player, i]) - 21 > 0)
-                    point += (gamemanager.manager.number_of_card(a.player[player, i]) - 21);
+                if (number_of_card(a.player[player, i]) >= 13 && number_of_card(a.player[player, i]) < 26 && number_of_card(a.player[player, i]) - 21 > 0)
+                    point += (number_of_card(a.player[player, i]) - 21);
             }
             return point;
         }
@@ -196,8 +197,8 @@ public class netgamemanager : NetworkBehaviour
         {
             for (int i = 0; i < 13; i++)
             {
-                if (gamemanager.manager.number_of_card(a.player[player, i]) >= 26 && gamemanager.manager.number_of_card(a.player[player, i]) < 39 && gamemanager.manager.number_of_card(a.player[player, i]) - 34 > 0)
-                    point += (gamemanager.manager.number_of_card(a.player[player, i]) - 34);
+                if (number_of_card(a.player[player, i]) >= 26 && number_of_card(a.player[player, i]) < 39 && number_of_card(a.player[player, i]) - 34 > 0)
+                    point += (number_of_card(a.player[player, i]) - 34);
             }
             return point;
         }
@@ -205,8 +206,8 @@ public class netgamemanager : NetworkBehaviour
         {
             for (int i = 0; i < 13; i++)
             {
-                if (gamemanager.manager.number_of_card(a.player[player, i]) >= 39 && gamemanager.manager.number_of_card(a.player[player, i]) < 52 && gamemanager.manager.number_of_card(a.player[player, i]) - 47 > 0)
-                    point += (gamemanager.manager.number_of_card(a.player[player, i]) - 47);
+                if (number_of_card(a.player[player, i]) >= 39 && number_of_card(a.player[player, i]) < 52 && number_of_card(a.player[player, i]) - 47 > 0)
+                    point += (number_of_card(a.player[player, i]) - 47);
             }
             return point;
         }
@@ -225,6 +226,543 @@ public class netgamemanager : NetworkBehaviour
             else
                 Poker[i].tag = "spade";
     }//把每張牌標上花色
+    public Vector2 cardtoplayer(GameObject[,] player, GameObject poker)
+    {
+        Vector2 a;
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                if (player[i, k] == poker)
+                {
+                    a = new Vector2(i, k);
+                    return a;
+                }
+        print("no person own the card");
+        a = new Vector2(-1, -1);
+        return a;
+    }//傳回該牌所屬的玩家編號和該牌為手牌中左邊數來第幾張牌
+    public void red_getscore()
+    {
+        red_score++;
+        GameObject.Find("teamred").GetComponent<Text>().text = "紅隊墩數：" + red_score;
+    }//紅隊得分時要做的事
+    public void blue_getscore()
+    {
+        blue_score++;
+        GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + blue_score;
+    }//藍隊得分時要做的事
+    public void reset_score()
+    {
+        GameObject.Find("teamblue").GetComponent<Text>().text = "藍隊墩數：" + 0;
+        GameObject.Find("teamred").GetComponent<Text>().text = "紅隊墩數：" + 0;
+    }//將兩隊墩數顯示重製為0
+
+    public int number_of_card(GameObject card)
+    {
+        for (int i = 0; i < 52; i++)
+            if (Poker[i].name + "(Clone)" == card.name)
+                return i;
+        return -1;
+    }//傳回某張牌的數字
+    public void card_compare()
+    {
+        bool big;
+        GameObject temp;
+
+        for (int i = 0; i < 3; i++)
+        {
+            big = false;
+            if (table_card[i].tag == table_card[i + 1].tag)
+            {
+                if (number_of_card(table_card[i]) > number_of_card(table_card[i + 1]))
+                    big = true;
+
+            }
+
+            else if (table_card[i].tag == "kingcolor")
+            {
+                big = true;
+            }
+            else if (table_card[i].tag == "mastercolor" && table_card[i + 1].tag != "kingcolor")
+                big = true;
+            if (big == true)
+            {
+                temp = table_card[i];
+                table_card[i] = table_card[i + 1];
+                table_card[i + 1] = temp;
+            }
+        }
+
+        /*if (cardtoplayer(player, table_card[3]).x == 0 || cardtoplayer(player, table_card[3]).x == 2)
+        {
+            red_getscore();
+
+            if (cardtoplayer(player, table_card[3]).x == 0)
+            {
+                pointer[playing_player].SetActive(false);
+                playing_player = 0;
+                pointer[0].SetActive(true);
+            }
+            else
+            {
+                pointer[playing_player].SetActive(false);
+                playing_player = 2;
+                pointer[2].SetActive(true);
+            }
+        }
+        else
+        {
+
+            blue_getscore();
+            if (cardtoplayer(player, table_card[3]).x == 1)
+            {
+                pointer[playing_player].SetActive(false);
+                playing_player = 1;
+                pointer[1].SetActive(true);
+            }
+            else
+            {
+                pointer[playing_player].SetActive(false);
+                playing_player = 3;
+                pointer[3].SetActive(true);
+            }
+        }*/
+    }//打完一輪牌後，結算誰吃到墩，把分數計算好，開始下回合。
+
+
+    public void inactive_button()
+    {
+
+        for (int i = 0; i < 8; i++)
+        {
+            number_button[i].SetActive(true);
+        }
+        restart_button.SetActive(true);
+    }//設置開始喊牌的按鈕
+    public void destroy_button()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            color_button[i].SetActive(false);
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            number_button[i].SetActive(false);
+        }
+    }//消除所有喊牌的按鈕
+    public int compute_color(string color, int player)
+    {
+        int num = 0;
+        for (int i = 0; i < handcardnum[player]; i++)
+        {
+            if (player_in_game[player, i].tag == color)
+                num++;
+        }
+        return num;
+    }//傳回某一花色在某一玩家手中的數量
+    public void put_card_on_table(GameObject gameObject)
+    {
+   
+        gameObject.transform.localScale = table_card_scale;
+        
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        if (NetworkClient.localPlayer.gameObject.tag == "player1")
+        {
+            //把牌打出去後，player_in_game陣列中移除該張牌、手中剩下的牌重新喬好位置
+            if (cardtoplayer(player, gameObject).x == 0)
+            {
+                handcardnum[0]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[0]; k++)
+                    player_in_game[0, k] = player_in_game[0, k + 1];
+                for (int i = 0; i < handcardnum[0]; i++)
+                    player_in_game[0, i].transform.position = new Vector2(leftcardhorizonpos[0] + handcardlength[0] / 24 * (13 - handcardnum[0]) + handcardlength[0] / 12 * i, cardverticalpos[0]);
+                gameObject.transform.position = new Vector2(0, -1.7f);
+                
+            }
+            else if (cardtoplayer(player, gameObject).x == 1)
+            {
+                handcardnum[1]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[1]; k++)
+                    player_in_game[1, k] = player_in_game[1, k + 1];
+                for (int i = 0; i < handcardnum[1]; i++)
+                    player_in_game[1, i].transform.position = new Vector2(cardverticalpos[1], leftcardhorizonpos[1] + handcardlength[1] / 24 * (13 - handcardnum[1]) + handcardlength[1] / 12 * i);
+
+                gameObject.transform.position = new Vector2(1.5f, 0);
+                
+
+
+
+            }
+            else if (cardtoplayer(player, gameObject).x == 2)
+            {
+                handcardnum[2]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[2]; k++)
+                    player_in_game[2, k] = player_in_game[2, k + 1];
+                for (int i = 0; i < handcardnum[2]; i++)
+                    player_in_game[2, i].transform.position = new Vector2(leftcardhorizonpos[2] - handcardlength[2] / 24 * (13 - handcardnum[2]) - handcardlength[2] / 12 * i, cardverticalpos[2]);
+
+                gameObject.transform.position = new Vector2(0, 1.7f);
+                
+
+
+            }
+            else
+            {
+                handcardnum[3]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[3]; k++)
+                    player_in_game[3, k] = player_in_game[3, k + 1];
+                for (int i = 0; i < handcardnum[3]; i++)
+                    player_in_game[3, i].transform.position = new Vector2(cardverticalpos[3], leftcardhorizonpos[3] - handcardlength[3] / 24 * (13 - handcardnum[3]) - handcardlength[3] / 12 * i);
+                gameObject.transform.position = new Vector2(-1.5f, 0);
+                
+            }
+        }
+        if (NetworkClient.localPlayer.gameObject.tag == "player2")
+        {
+            //把牌打出去後，player_in_game陣列中移除該張牌、手中剩下的牌重新喬好位置
+            if (cardtoplayer(player, gameObject).x == 1)
+            {
+                handcardnum[1]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[1]; k++)
+                    player_in_game[1, k] = player_in_game[1, k + 1];
+                for (int i = 0; i < handcardnum[1]; i++)
+                    player_in_game[1, i].transform.position = new Vector2(leftcardhorizonpos[0] + handcardlength[0] / 24 * (13 - handcardnum[1]) + handcardlength[0] / 12 * i, cardverticalpos[0]);
+                gameObject.transform.position = new Vector2(0, -1.7f);
+                
+            }
+            else if (cardtoplayer(player, gameObject).x == 2)
+            {
+                handcardnum[2]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[2]; k++)
+                    player_in_game[2, k] = player_in_game[2, k + 1];
+                for (int i = 0; i < handcardnum[2]; i++)
+                    player_in_game[2, i].transform.position = new Vector2(cardverticalpos[1], leftcardhorizonpos[1] + handcardlength[1] / 24 * (13 - handcardnum[2]) + handcardlength[1] / 12 * i);
+
+                gameObject.transform.position = new Vector2(1.5f, 0);
+                
+
+
+            }
+            else if (cardtoplayer(player, gameObject).x == 3)
+            {
+                handcardnum[3]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[3]; k++)
+                    player_in_game[3, k] = player_in_game[3, k + 1];
+                for (int i = 0; i < handcardnum[3]; i++)
+                    player_in_game[3, i].transform.position = new Vector2(leftcardhorizonpos[2] - handcardlength[2] / 24 * (13 - handcardnum[3]) - handcardlength[2] / 12 * i, cardverticalpos[2]);
+
+                gameObject.transform.position = new Vector2(0, 1.7f);
+                
+
+            }
+            else
+            {
+                handcardnum[0]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[0]; k++)
+                    player_in_game[0, k] = player_in_game[0, k + 1];
+                for (int i = 0; i < handcardnum[0]; i++)
+                    player_in_game[0, i].transform.position = new Vector2(cardverticalpos[3], leftcardhorizonpos[3] - handcardlength[3] / 24 * (13 - handcardnum[0]) - handcardlength[3] / 12 * i);
+                gameObject.transform.position = new Vector2(-1.5f, 0);
+                
+            }
+        }
+        if (NetworkClient.localPlayer.gameObject.tag == "player3")
+        {
+            //把牌打出去後，player_in_game陣列中移除該張牌、手中剩下的牌重新喬好位置
+            if (cardtoplayer(player, gameObject).x == 2)
+            {
+                handcardnum[2]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[2]; k++)
+                    player_in_game[2, k] = player_in_game[2, k + 1];
+                for (int i = 0; i < handcardnum[2]; i++)
+                    player_in_game[2, i].transform.position = new Vector2(leftcardhorizonpos[0] + handcardlength[0] / 24 * (13 - handcardnum[2]) + handcardlength[0] / 12 * i, cardverticalpos[0]);
+                gameObject.transform.position = new Vector2(0, -1.7f);
+                
+            }
+            else if (cardtoplayer(player, gameObject).x == 3)
+            {
+                handcardnum[3]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[3]; k++)
+                    player_in_game[3, k] = player_in_game[3, k + 1];
+                for (int i = 0; i < handcardnum[3]; i++)
+                    player_in_game[3, i].transform.position = new Vector2(cardverticalpos[1], leftcardhorizonpos[1] + handcardlength[1] / 24 * (13 - handcardnum[3]) + handcardlength[1] / 12 * i);
+
+                gameObject.transform.position = new Vector2(1.5f, 0);
+                
+
+
+            }
+            else if (cardtoplayer(player, gameObject).x == 0)
+            {
+                handcardnum[0]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[0]; k++)
+                    player_in_game[0, k] = player_in_game[0, k + 1];
+                for (int i = 0; i < handcardnum[0]; i++)
+                    player_in_game[0, i].transform.position = new Vector2(leftcardhorizonpos[2] - handcardlength[2] / 24 * (13 - handcardnum[0]) - handcardlength[2] / 12 * i, cardverticalpos[2]);
+
+                gameObject.transform.position = new Vector2(0, 1.7f);
+                
+
+            }
+            else
+            {
+                handcardnum[1]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[1]; k++)
+                    player_in_game[1, k] = player_in_game[1, k + 1];
+                for (int i = 0; i < handcardnum[1]; i++)
+                    player_in_game[1, i].transform.position = new Vector2(cardverticalpos[3], leftcardhorizonpos[3] - handcardlength[3] / 24 * (13 - handcardnum[1]) - handcardlength[3] / 12 * i);
+                gameObject.transform.position = new Vector2(-1.5f, 0);
+                
+            }
+        }
+        if (NetworkClient.localPlayer.gameObject.tag == "player4")
+        {
+            //把牌打出去後，player_in_game陣列中移除該張牌、手中剩下的牌重新喬好位置
+            if (cardtoplayer(player, gameObject).x == 3)
+            {
+                handcardnum[3]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[3]; k++)
+                    player_in_game[3, k] = player_in_game[3, k + 1];
+                for (int i = 0; i < handcardnum[3]; i++)
+                    player_in_game[3, i].transform.position = new Vector2(leftcardhorizonpos[0] + handcardlength[0] / 24 * (13 - handcardnum[3]) + handcardlength[0] / 12 * i, cardverticalpos[0]);
+                gameObject.transform.position = new Vector2(0, -1.7f);
+                
+            }
+            else if (cardtoplayer(player, gameObject).x == 0)
+            {
+                handcardnum[0]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[0]; k++)
+                    player_in_game[0, k] = player_in_game[0, k + 1];
+                for (int i = 0; i < handcardnum[0]; i++)
+                    player_in_game[0, i].transform.position = new Vector2(cardverticalpos[1], leftcardhorizonpos[1] + handcardlength[1] / 24 * (13 - handcardnum[0]) + handcardlength[1] / 12 * i);
+
+                gameObject.transform.position = new Vector2(1.5f, 0);
+                
+
+
+            }
+            else if (cardtoplayer(player, gameObject).x == 1)
+            {
+                handcardnum[1]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[1]; k++)
+                    player_in_game[1, k] = player_in_game[1, k + 1];
+                for (int i = 0; i < handcardnum[1]; i++)
+                    player_in_game[1, i].transform.position = new Vector2(leftcardhorizonpos[2] - handcardlength[2] / 24 * (13 - handcardnum[1]) - handcardlength[2] / 12 * i, cardverticalpos[2]);
+
+                gameObject.transform.position = new Vector2(0, 1.7f);
+                
+
+            }
+            else
+            {
+                handcardnum[2]--;
+                for (int k = (int)cardtoplayer(player_in_game, gameObject).y; k < handcardnum[2]; k++)
+                    player_in_game[2, k] = player_in_game[2, k + 1];
+                for (int i = 0; i < handcardnum[2]; i++)
+                    player_in_game[2, i].transform.position = new Vector2(cardverticalpos[3], leftcardhorizonpos[3] - handcardlength[3] / 24 * (13 - handcardnum[2]) - handcardlength[3] / 12 * i);
+                gameObject.transform.position = new Vector2(-1.5f, 0);
+                
+            }
+        }
+
+        table_card[table_card_number] = gameObject;//將該張牌放到儲存桌面上的牌的陣列
+        table_card_number++;
+        //pointer[playing_player].SetActive(false);
+        playing_player = (playing_player + 3) % 4;
+        //pointer[playing_player].SetActive(true);
+        if (table_card_number == 1)
+        {
+            if (gameObject.tag != "kingcolor")
+            {
+                temp_color = gameObject.tag;
+                for (int i = 0; i < 4; i++)
+                    for (int k = 0; k < 13; k++)
+                        if (player[i, k].tag == temp_color)
+                        {
+                            player[i, k].tag = "mastercolor";
+                        }
+                must_color = gameObject.tag;
+            }//如果那張牌的花色不是王，那張牌的花色變成mastercolor，大家都得出那個花色
+            else//如果那張牌的花色是王，大家都得出王
+                must_color = gameObject.tag;
+        }//打出的牌是第一張牌
+
+        if (table_card_number == 4)
+        {
+            card_compare();
+
+            //把原本tag設成mastercolor的牌的tag設回來
+            for (int i = 0; i < 4; i++)
+                for (int k = 0; k < 13; k++)
+                    if (player[i, k].tag == "mastercolor")
+                        player[i, k].tag = temp_color;
+            Invoke("recycle_card", 1f);
+
+            //隔2秒把桌面的牌回收，牌數變回0
+
+        }//打出的牌是第四張牌
+    }//把手中的牌拖拉到桌上會觸發的動作，需同時傳上該腳本的ontable參數
+    public void after_call_card()
+    {
+        //決定王
+        if (temp_king == 1)
+        {
+            king = "clover";
+            king_UI.GetComponent<Text>().text = "王：梅花";
+        }
+        if (temp_king == 2)
+        {
+            king = "diamond";
+            king_UI.GetComponent<Text>().text = "王：磚塊";
+        }
+        if (temp_king == 3)
+        {
+            king = "heart";
+            king_UI.GetComponent<Text>().text = "王：愛心";
+        }
+        if (temp_king == 4)
+        {
+            king = "spade";
+            king_UI.GetComponent<Text>().text = "王：黑桃";
+        }
+        if (temp_king == 5)
+        {
+            king = "mastercolor";
+            king_UI.GetComponent<Text>().text = "本局無王";
+        }
+
+        //把王的花色的tag改成kingcolor
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                if (player[i, k].tag == king)
+                    player[i, k].tag = "kingcolor";
+
+
+
+        if (playing_player == 0 || playing_player % 4 == 2)
+        {
+            blue_goal_score = call_number + 6;
+            red_goal_score = 14 - blue_goal_score;
+        }//藍隊喊到
+        else
+        {
+            red_goal_score = call_number + 6;
+            blue_goal_score = 14 - red_goal_score;
+        }//紅隊喊到
+
+        //設置場景上的文字
+        red_goal_UI.GetComponent<Text>().text = "紅隊目標墩數：" + red_goal_score;
+        blue_goal_UI.GetComponent<Text>().text = "藍隊目標墩數：" + blue_goal_score;
+        red_goal_UI.SetActive(true);
+        blue_goal_UI.SetActive(true);
+        king_UI.SetActive(true);
+    }//喊玩牌後根據喊牌內容設定好規則
+    public void restart_card()
+    {
+        playing_player = 0;
+        for (int i = 0; i < 4; i++)
+            for (int k = 0; k < 13; k++)
+                DestroyImmediate(player[i, k]);
+        inactive_button();
+        table.SetActive(true);
+        team_red.SetActive(true);
+        team_blue.SetActive(true);
+        pointer[0].SetActive(true);
+        pointer[1].SetActive(false);
+        pointer[2].SetActive(false);
+        pointer[3].SetActive(false);
+        reset_score();
+        win_panel.SetActive(false);
+        start_card();
+    }//重新開始遊戲
+    public bool can_be_select(bool ontable, GameObject gameObject)
+    {
+
+        if (table_card_number == 4 && table_card[3].activeSelf == true)
+            return false;
+        if (
+            ontable == false //不在桌上
+            &&
+            call_card_finish == true //喊完牌了才能打牌
+            &&
+            (
+                //在特定情況下有某些花色不能打
+                table_card_number == 0 //第一個人出牌可以出任何花色
+                ||
+                gameObject.tag == must_color //只能出跟第一個人一樣的花色
+                ||
+
+                //手中如果該花色沒了就可以切牌或墊牌
+                compute_color(must_color, (int)cardtoplayer(player, gameObject).x) == 0
+            )
+            &&
+            //輪到該玩家才能出牌
+            (int)cardtoplayer(player, gameObject).x == playing_player
+            )
+            return true;
+        else
+            return false;
+    }//檢測那張牌能不能打，可以的話才能選取
+    public void playerUI_control(string color)
+    {
+        player_call_card[(playing_player + 3) % 4].GetComponent<Text>().text = call_number + color;
+        for (int i = 0; i < 3; i++)
+            player_call_card[(playing_player + i) % 4].GetComponent<Text>().text = "尚未喊牌";
+
+    }
+    public void game_finish()
+    {
+        AI_control.SetActive(false);
+        red_goal_UI.SetActive(false);
+        blue_goal_UI.SetActive(false);
+        king_UI.SetActive(false);
+        blue_goal.GetComponent<Text>().text = "藍隊目標墩數：" + blue_goal_score;
+        red_goal.GetComponent<Text>().text = "紅隊目標墩數：" + red_goal_score;
+        red_team_score.GetComponent<Text>().text = "紅隊獲得墩數：" + red_score;
+        blue_team_score.GetComponent<Text>().text = "藍隊獲得墩數：" + blue_score;
+    }
+
+    public string transform_num_to_color(int a)
+    {
+        if (a == 1)
+            return "clover";
+        if (a == 2)
+            return "diamond";
+        if (a == 3)
+            return "heart";
+        if (a == 4)
+            return "spade";
+        if (a == 5)
+            return "noking";
+        else
+        {
+            print("this color doesn't indicate any integer");
+            return "null";
+        }
+    }
+    public void recycle_card()
+    {
+        for (int i = 0; i < 4; i++)
+            table_card[i].SetActive(false);
+        table_card_number = 0;
+
+        //如果某隊達到目標分數，結束遊戲，顯示遊戲結果
+        /*if (gamemanager.manager.red_score == gamemanager.manager.red_goal_score)
+        {
+            gamemanager.manager.win_panel.SetActive(true);
+            GameObject.Find("winner").GetComponent<Text>().text = "紅隊勝利";
+            gamemanager.manager.game_finish();
+        }
+        if (gamemanager.manager.blue_score == gamemanager.manager.blue_goal_score)
+        {
+            gamemanager.manager.win_panel.SetActive(true);
+            GameObject.Find("winner").GetComponent<Text>().text = "藍隊勝利";
+            gamemanager.manager.game_finish();
+        }
+
+        gamemanager.manager.pointer[gamemanager.manager.playing_player].SetActive(true);*/
+    }
+
+
 
 
 

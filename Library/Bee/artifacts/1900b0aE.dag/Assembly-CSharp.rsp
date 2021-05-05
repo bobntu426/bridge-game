@@ -380,6 +380,7 @@
 "Assets/script/mousecontrol.cs"
 "Assets/script/netgamemanager.cs"
 "Assets/script/network_control.cs"
+"Assets/script/net_button_control.cs"
 "Assets/script/net_mousecontrol.cs"
 "Assets/script/tablecontrol.cs"
 -langversion:8.0

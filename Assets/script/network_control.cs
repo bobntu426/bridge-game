@@ -16,12 +16,12 @@ public class network_control : NetworkBehaviour
         else if (netgamemanager.netmanager.g == 1)
         {
             gameObject.tag = "player2";
-            netgamemanager.netmanager.g++;
+            Cmd_g();
         }
         else if (netgamemanager.netmanager.g == 2)
         {
             gameObject.tag = "player3";
-            netgamemanager.netmanager.g++;
+            Cmd_g();
         }
         else if (netgamemanager.netmanager.g == 3)
         {
@@ -81,6 +81,7 @@ public class network_control : NetworkBehaviour
     [ClientRpc]
     public void Rpcsetcard()//依照index把各張牌分配到各玩家手中，並設好位置、屬性
     {
+        
         for (int k = 0; k < 4; k++)
         {
 
@@ -140,6 +141,7 @@ public class network_control : NetworkBehaviour
                 }
                 else if (NetworkClient.localPlayer.gameObject.tag == "player3")
                 {
+                    netgamemanager.netmanager.player[k, i].transform.Rotate(new Vector3(0, 0, 90 * k - 180));
                     if (k == 2)
                     {
                         netgamemanager.netmanager.player[k, i].transform.position = new Vector2(netgamemanager.netmanager.leftcardhorizonpos[0] + i * (netgamemanager.netmanager.handcardlength[0] / 12), netgamemanager.netmanager.cardverticalpos[0]);
@@ -164,7 +166,7 @@ public class network_control : NetworkBehaviour
                 }
                 else if (NetworkClient.localPlayer.gameObject.tag == "player4")
                 {
-
+                    netgamemanager.netmanager.player[k, i].transform.Rotate(new Vector3(0, 0, 90 * k - 270));
                     if (k == 3)
                     {
                         netgamemanager.netmanager.player[k, i].transform.position = new Vector2(netgamemanager.netmanager.leftcardhorizonpos[0] + i * (netgamemanager.netmanager.handcardlength[0] / 12), netgamemanager.netmanager.cardverticalpos[0]);
@@ -189,10 +191,26 @@ public class network_control : NetworkBehaviour
                 
             }
         }
+
     }
     [Command]
     public void Cmdsetcard()
     {
         Rpcsetcard();
+    }
+    [Command]
+    public void Cmd_g()
+    {
+        netgamemanager.netmanager.g++;
+    }
+    [Command]
+    public void Cmd_put_card(GameObject gameObject)
+    {
+        Rpc_put_card(gameObject);
+    }
+    [ClientRpc]
+    public void Rpc_put_card(GameObject gameObject)
+    {
+        netgamemanager.netmanager.put_card_on_table(gameObject);
     }
 }

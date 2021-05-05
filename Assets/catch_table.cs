@@ -9,6 +9,7 @@ public class catch_table : NetworkBehaviour
     public override void OnStartClient()
     {
         id=gameObject.GetComponent<NetworkIdentity>().netId;
+        gameObject.AddComponent<tablecontrol>();
     }
 
     // Update is called once per frame

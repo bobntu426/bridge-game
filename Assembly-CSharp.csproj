@@ -56,18 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\script\net_mousecontrol.cs" />
     <Compile Include="Assets\gamemanager.cs" />
     <Compile Include="Assets\script\netgamemanager.cs" />
     <Compile Include="Assets\script\buttoncontrol.cs" />
     <Compile Include="Assets\script\network_control.cs" />
     <Compile Include="Assets\script\catch_netid.cs" />
+    <Compile Include="Assets\catch_table.cs" />
     <Compile Include="Assets\ParrelSync\Examples\CustomArgumentExample.cs" />
     <Compile Include="Assets\script\tablecontrol.cs" />
     <Compile Include="Assets\script\gameprocess.cs" />
     <Compile Include="Assets\script\AI_control.cs" />
     <Compile Include="Assets\script\mousecontrol.cs" />
-    <Compile Include="Assets\script\net_mousecontrol.cs" />
-    <Compile Include="Assets\catch_table.cs" />
+    <Compile Include="Assets\script\net_button_control.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
